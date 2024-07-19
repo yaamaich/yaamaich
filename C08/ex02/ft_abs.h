@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_is_negative.c                                   :+:      :+:    :+:   */
+/*   ft_abs.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-moh <aben-moh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/27 18:08:31 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/06/29 10:34:37 by yaamaich         ###   ########.fr       */
+/*   Created: 2024/07/14 15:54:37 by aben-moh          #+#    #+#             */
+/*   Updated: 2024/07/16 02:27:36 by aben-moh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#ifndef FT_ABS_H
+# define FT_ABS_H
 
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
+# define ABS(value) ((value < 0) * -value + (value >= 0) * value)
 
-void	ft_is_negative(int n)
-{
-	if (n < 0)
-	{
-		ft_putchar('N');
-	}
-	else if (n >= 0)
-	{
-		ft_putchar('P');
-	}
-}
+#endif

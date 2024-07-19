@@ -6,7 +6,7 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 18:27:09 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/06/27 20:24:49 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/06/29 11:41:27 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,17 @@ void	ft_print_comb2(void)
 		while (++b <= '9')
 		{
 			c = a;
-			d = b;
-			while (++d <= '9')
-				ft_print(a, b, c, d);
-			while (++c <= '9')
+			d = b + 1;
+			while (c <= '9')
 			{
-				d = '0';
 				while (d <= '9')
-					ft_print(a, b, c, d++);
+				{
+					ft_print(a, b, c, d);
+					d++;
+				}
+				d = '0';
+				c++;
 			}
 		}
 	}
-}
-int main()
-{
-
-	ft_print_comb2();
 }

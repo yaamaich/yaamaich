@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_is_negative.c                                   :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/27 18:08:31 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/06/29 10:34:37 by yaamaich         ###   ########.fr       */
+/*   Created: 2024/07/08 18:35:11 by yaamaich          #+#    #+#             */
+/*   Updated: 2024/07/08 18:43:14 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-void	ft_putchar(char c)
+char	*ft_strstr(char *str, char *to_find)
 {
-	write(1, &c, 1);
-}
+	int	i;
+	int	j;
 
-void	ft_is_negative(int n)
-{
-	if (n < 0)
+	i = 0;
+	j = 0;
+	if (to_find[j] == '\0')
+		return (str);
+	while (str[i] != '\0')
 	{
-		ft_putchar('N');
+		while (str[i + j] == to_find[j] && str[i + j] != '\0')
+			j++;
+		if (to_find[j] == '\0')
+			return (str + i);
+		i++;
+		j = 0;
 	}
-	else if (n >= 0)
-	{
-		ft_putchar('P');
-	}
+	return (0);
 }

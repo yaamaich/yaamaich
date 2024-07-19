@@ -6,12 +6,13 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 00:08:14 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/07/17 00:29:43 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/07/18 03:18:08 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
+
 int	ft_ultimate_range(int **range, int min, int max)
 {
 	int		bound;
@@ -39,7 +40,7 @@ int	ft_ultimate_range(int **range, int min, int max)
 	}
 	return (bound);
 }
-
+/*
 int main(void)
 {
 	int	min;
@@ -56,4 +57,4 @@ int main(void)
 		printf("%d, ", tab[i]);
 		i++;
 	}
-}
+}*/

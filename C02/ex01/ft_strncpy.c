@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/02 13:27:14 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/07/02 18:00:33 by yaamaich         ###   ########.fr       */
+/*   Created: 2024/07/07 21:42:09 by yaamaich          #+#    #+#             */
+/*   Updated: 2024/07/08 23:03:18 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,15 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n)
 		dest[i] = src[i];
 		i++;
 	}
-	if (dest[i] < n && dest != '\0')
+	while (i < n)
 	{
-		dest[i] = dest[i];
+		dest[i] = '\0';
 		i++;
 	}
 	return (dest);
+}
+int man ()
+{
+	char c[}] = 
+	
 }

@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_is_negative.c                                   :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/27 18:08:31 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/06/29 10:34:37 by yaamaich         ###   ########.fr       */
+/*   Created: 2024/07/07 22:36:42 by yaamaich          #+#    #+#             */
+/*   Updated: 2024/07/07 22:36:44 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-void	ft_putchar(char c)
+char	*ft_strncat(char *dest, char *src, unsigned int nb)
 {
-	write(1, &c, 1);
-}
+	unsigned int	i;
+	unsigned int	j;
 
-void	ft_is_negative(int n)
-{
-	if (n < 0)
+	i = 0;
+	j = 0;
+	while (dest[i] != '\0')
 	{
-		ft_putchar('N');
+		i++;
 	}
-	else if (n >= 0)
+	while (j < nb && src[j] != '\0')
 	{
-		ft_putchar('P');
+		dest[i] = src [j];
+		j++;
+		i++;
 	}
+	dest[i] = '\0';
+	return (dest);
 }

@@ -5,12 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/02 18:47:41 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/07/02 20:03:32 by yaamaich         ###   ########.fr       */
+/*   Created: 2024/07/07 22:16:48 by yaamaich          #+#    #+#             */
+/*   Updated: 2024/07/07 22:16:56 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strlowercase(char *str)
+#include <unistd.h>
+
+char	*ft_strlowcase(char *str)
 {
 	int	i;
 
@@ -19,7 +21,7 @@ char	*ft_strlowercase(char *str)
 	{
 		if (str[i] >= 'A' && str[i] <= 'Z')
 		{
-			str[i] = str[i] - 32;
+			str[i] += 32;
 		}
 		i++;
 	}
@@ -29,24 +31,35 @@ char	*ft_strlowercase(char *str)
 char	*ft_strcapitalize(char *str)
 {
 	int	i;
-	int	j;
+	int	g;
 
-	ft_strlowercase(str);
 	i = 0;
-	j = 1;
+	g = 1;
+	ft_strlowcase(str);
 	while (str[i] != '\0')
 	{
 		if (str[i] >= 'a' && str[i] <= 'z')
 		{
-			if (j == 1)
-				str[i] = str[i] - 32;
-			j = 0;
+			if (g == 1)
+			{
+				str[i] -= 32;
+				g = 0;
+			}
 		}
 		else if (str[i] >= '0' && str[i] <= '9')
-			j = 0;
-		else 
-			j = 1;
+		{
+			g = 0;
+		}
+		else
+			g = 1;
 		i++;
 	}
 	return (str);
 }
+
+/*int main()
+{
+	char arr[] = "salut, comMEnt tu vas ? 42Mots quarante-deux; cinquante+et+un";
+	printf("%s", ft_strcapitalize (arr));
+	return 0;
+}*/

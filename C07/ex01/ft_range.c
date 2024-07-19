@@ -6,25 +6,26 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 01:32:25 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/07/16 23:01:37 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/07/19 02:13:31 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
-int *ft_range(int min, int max)
+
+int	*ft_range(int min, int max)
 {
-	int *range;
+	int	*range;
 	int	i;
-	
+
 	i = max - min;
-    if (min >= max)
+	if (min > max)
 		return (0);
-	range = malloc(sizeof(int) * (i));
+	range = malloc(sizeof(int) * (i + 1));
 	if (range == NULL)
 		return (0);
 	i = 0;
-	while(min < max)
+	while (min <= (max + 1))
 	{
 		range[i] = min;
 		min++;
@@ -32,6 +33,7 @@ int *ft_range(int min, int max)
 	}
 	return (range);
 }
+
 
 int main(void)
 {

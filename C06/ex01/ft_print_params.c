@@ -6,16 +6,16 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 22:15:46 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/07/14 02:12:42 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/07/14 20:29:18 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-int		main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	int	i;
-	int j;
+	int	j;
 
 	j = 1;
 	while (j < argc)

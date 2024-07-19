@@ -5,34 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/02 18:04:38 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/07/02 18:35:17 by yaamaich         ###   ########.fr       */
+/*   Created: 2024/07/07 22:15:58 by yaamaich          #+#    #+#             */
+/*   Updated: 2024/07/08 00:32:43 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_str_is_uppercase(char *str)
 {
 	int	i;
-	int	j;
 
-	j = 0;
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] >= 'A' && str[i] <= 'Z')
-		{
-			i++;
-			j++;
-		}
-		else 
-		{
-			j = 0;
-			break ;
-		}
-	}
-	if (j == 0)
-	{
-		return (0);
+		if (!(str[i] >= 'A' && str[i] <= 'Z'))
+			return (0);
+		i++;
 	}
 	return (1);
 }

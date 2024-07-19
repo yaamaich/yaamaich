@@ -6,11 +6,11 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 18:39:02 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/07/02 18:40:30 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/07/07 21:57:02 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strupcase(char *str)
+char	*ft_strlowcase(char *str)
 {
 	int	i;
 

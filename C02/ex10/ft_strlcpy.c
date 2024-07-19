@@ -5,36 +5,29 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/02 20:06:41 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/07/02 20:53:02 by yaamaich         ###   ########.fr       */
+/*   Created: 2024/07/07 22:17:54 by yaamaich          #+#    #+#             */
+/*   Updated: 2024/07/07 22:17:57 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strlen(char *str)
-{
-	int	i;
+#include <unistd.h>
 
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
-}
-
-unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
+unsigned	int	ft_strlcpy(char *dest, char *src, unsigned int size)
 {
 	unsigned int	i;
-	unsigned int	x;
+	unsigned int	g;
 
-	x = ft_strlen(src);
 	i = 0;
-	if (size != 0)
+	g = 0;
+	while (src[g] != '\0')
+		g++;
+	if (size == 0)
+		return (g);
+	while (i < (size - 1))
 	{
-		while (src [i] != '\0' && i < size - 1)
-		{
-			dest[i] = src[i];
-			i++;
-		}
-		dest[i] = '\0';
+		dest[i] = src[i];
+		i++;
 	}
-	return (x);
+	dest[i] = '\0';
+	return (g);
 }

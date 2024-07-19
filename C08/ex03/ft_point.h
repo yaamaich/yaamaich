@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_is_negative.c                                   :+:      :+:    :+:   */
+/*   ft_point.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-moh <aben-moh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/27 18:08:31 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/06/29 10:34:37 by yaamaich         ###   ########.fr       */
+/*   Created: 2024/07/15 17:02:32 by aben-moh          #+#    #+#             */
+/*   Updated: 2024/07/16 19:43:01 by aben-moh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#ifndef FT_POINT_H
+# define FT_POINT_H
 
-void	ft_putchar(char c)
+typedef struct p
 {
-	write(1, &c, 1);
-}
+	int		x;
+	int		y;
+}	t_point;
 
-void	ft_is_negative(int n)
-{
-	if (n < 0)
-	{
-		ft_putchar('N');
-	}
-	else if (n >= 0)
-	{
-		ft_putchar('P');
-	}
-}
+#endif
