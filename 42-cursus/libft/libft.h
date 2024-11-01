@@ -1,0 +1,39 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/26 00:52:26 by yaamaich          #+#    #+#             */
+/*   Updated: 2024/11/01 03:53:33 by yaamaich         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef LIBFT_H
+#define LIBFT_H
+#include <stddef.h>
+
+void	*ft_bzero(void *s, size_t n);
+int	ft_isprint(int c);
+void	*ft_memcpy(void *to,const void	*from,size_t c);
+void	*ft_memmove(void *to, const void *from, size_t len);
+void	*ft_memset(void *str, int c, size_t len);
+int	ft_strlen(char *c);
+int	ft_isalnum(int str);
+int	ft_isalpha(int str);
+int	ft_isascii(unsigned int a);
+int	ft_isdigit(int str);
+int ft_toupper(int c);
+int ft_tolower(int c);
+char	*ft_strchr(const char *str, int ch);
+char *ft_strrchr(const char *s, int c);
+int	ft_strncmp(const char *str1, const char *str2, size_t n);
+void	*ft_memchr(const void *str, int c, size_t n);
+int ft_memcmp (const void *s1, const void *s2, size_t n);
+char *ft_strnstr(const char *str1, const char *str2, size_t len);
+size_t ft_strlcpy(char *dst, const char *src, size_t size);
+int	ft_atoi(const char *str);
+
+
+#endif

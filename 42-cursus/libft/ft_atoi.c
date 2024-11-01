@@ -1,30 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/23 18:46:51 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/10/31 23:47:51 by yaamaich         ###   ########.fr       */
+/*   Created: 2024/10/31 05:08:30 by yaamaich          #+#    #+#             */
+/*   Updated: 2024/10/31 22:32:11 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stddef.h>
-#include <string.h>
-
-
-void	*ft_memset(void *str, int c, size_t len)
+int	ft_atoi(const char *str)
 {
-	char	*p;
+	int	i;
+	int	singe;
+	int	result;
 
-	p = str;
-	while (len-- > 0)
+	i = 0;
+	result = 0;
+	singe = 1;
+	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	if (str[i] == '-' || str[i] == '+')
 	{
-		*p = c;
-		p++;
+		if (str[i] == '-')
+		{
+			singe *= -1;
+		}
+		i++;
 	}
-	return (str);
+	while (str[i] != '\0' && (str[i] >= '0' && str[i] <= '9'))
+	{
+		result *= 10;
+		result += (str[i] - 48);
+		i++;
+	}
+	return (result * singe);
 }
-

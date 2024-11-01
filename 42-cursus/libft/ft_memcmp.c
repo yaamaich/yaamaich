@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/23 18:46:51 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/10/31 23:47:51 by yaamaich         ###   ########.fr       */
+/*   Created: 2024/10/30 19:18:41 by yaamaich          #+#    #+#             */
+/*   Updated: 2024/10/30 23:33:16 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stddef.h>
-#include <string.h>
 
-
-void	*ft_memset(void *str, int c, size_t len)
+int ft_memcmp (const void *s1, const void *s2, size_t n)
 {
-	char	*p;
-
-	p = str;
-	while (len-- > 0)
+	unsigned char  *i = (unsigned char *)s1;
+	unsigned char  *l = (unsigned char *)s2;
+	while (*i && *i == *l && n > 0)
 	{
-		*p = c;
-		p++;
+		n--;
+		i++;
+		l++;
 	}
-	return (str);
+	return (*i - *l);
 }
-
