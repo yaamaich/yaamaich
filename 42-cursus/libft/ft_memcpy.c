@@ -6,19 +6,21 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 12:44:56 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/01 00:13:10 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/11/02 01:17:37 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stddef.h>
+#include <stdio.h>
 
-void	 *ft_memcpy(void *to,const void	*from,size_t c)
+void	*ft_memcpy(void *to, const void *from, size_t c)
 {
-	unsigned char *dest = (unsigned char *)to;
-	unsigned char *src = (unsigned char *)from;
-	
-	if (!(src && dest))
+	unsigned char	*dest;
+	unsigned char	*src;
+
+	dest = (unsigned char *)to;
+	src = (unsigned char *)from;
+	if ((src == NULL && dest == NULL))
 		return (NULL);
 	while (c-- > 0)
 	{
@@ -26,6 +28,5 @@ void	 *ft_memcpy(void *to,const void	*from,size_t c)
 		dest++;
 		src++;
 	}
-	return to;
+	return (to);
 }
-

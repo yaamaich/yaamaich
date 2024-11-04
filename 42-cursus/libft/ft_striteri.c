@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/23 12:27:51 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/04 02:04:19 by yaamaich         ###   ########.fr       */
+/*   Created: 2024/11/04 02:07:13 by yaamaich          #+#    #+#             */
+/*   Updated: 2024/11/04 02:21:45 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
 
-size_t	ft_strlen(const char *c)
+void ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	size_t	i;
+	size_t i;
 
 	i = 0;
-	while (c[i])
+	while (s[i])
 	{
+		f(i, &s[i]);
 		i++;
 	}
-	return (i);
 }

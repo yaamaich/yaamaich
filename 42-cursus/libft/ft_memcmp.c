@@ -6,19 +6,25 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 19:18:41 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/10/30 23:33:16 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/11/02 02:20:17 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
-int ft_memcmp (const void *s1, const void *s2, size_t n)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	unsigned char  *i = (unsigned char *)s1;
-	unsigned char  *l = (unsigned char *)s2;
-	while (*i && *i == *l && n > 0)
+	unsigned char	*i;
+	unsigned char	*l;
+
+	i = (unsigned char *)s1;
+	l = (unsigned char *)s2;
+	if (n == 0)
 	{
-		n--;
+		return (0);
+	}
+	while (*i == *l && --n > 0)
+	{
 		i++;
 		l++;
 	}

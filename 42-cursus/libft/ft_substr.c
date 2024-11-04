@@ -1,31 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/29 19:28:38 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/02 00:57:26 by yaamaich         ###   ########.fr       */
+/*   Created: 2024/11/03 05:19:41 by yaamaich          #+#    #+#             */
+/*   Updated: 2024/11/03 23:36:50 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 #include <stddef.h>
-#include <stdio.h>
+#include <stddef.h>
 
-char	*ft_strrchr(const char *s, int c)
+
+char *ft_substr(char const *s, unsigned int start, size_t len)
 {
-	unsigned char	*ptr;
-	int				p;
-
-	ptr = (unsigned char *)s;
-	p = ft_strlen(s);
-	while (p >= 0)
+	unsigned int i;
+	unsigned int k;
+	char *p;
+	
+	k = 0;
+	if (!s)
+		return (NULL);
+	i = ft_strlen(s);
+	if (len > i - start)
+		len = i - start;	
+	if (start >= i)
+		return (ft_strdup(""));
+	p = malloc(len + 1);
+	if (!p)
+		return (NULL);
+	while (s[start] && k < len)
 	{
-		if (ptr[p] == (unsigned char)c)
-			return ((char *)&s[p]);
-		p--;
+		p[k] = s[start];
+		k++;
+		start++;
 	}
-	return (NULL);
+	p[k] = '\0';
+	return (p);
 }

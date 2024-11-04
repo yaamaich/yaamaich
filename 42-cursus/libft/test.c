@@ -6,7 +6,7 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:03:41 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/01 05:59:25 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/11/04 02:11:58 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,32 @@
 //     char *result = test_memchr(str,target,5);
 // 	printf("%s\n ,%s ", result, c);
 // }
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 int	main(void)
 {
-	printf("%d\n",ft_strncmp("test\200", "test\0", 6));
-	printf("%d",strncmp("test\200", "test\0", 6));
-	// char p[40];
-	// char t[] = "lorem ipum dolor sit a";
-	// ft_strlcpy(p,t, 8);
-	// printf("%zu\n", ft_strlcpy(p,t, 8));
-	// printf("%s\n", p);
-	// strlcpy(p, t, 8);
-	// printf("%lu\n", strlcpy(p, t, 8));
-	// printf("%s\n", p);
+	char	*str;
+
+	str = "yahya";
+	printf("%s", ft_memcpy(((void *)0), ((void *)0), 3));
+	printf("%s", memcpy(((void *)0), ((void *)0), 3));
 }
+// int	main(void)
+// {
+// 	printf("%d\n",ft_strncmp("testç", "testn", 6));
+// 	printf("%d",strncmp("test\200", "test\0", 6));
+// 	// char p[40];
+// 	// char t[] = "lorem ipum dolor sit a";
+// 	// ft_strlcpy(p,t, 8);
+// 	// printf("%zu\n", ft_strlcpy(p,t, 8));
+// 	// printf("%s\n", p);
+// 	// strlcpy(p, t, 8);
+// 	// printf("%lu\n", strlcpy(p, t, 8));
+// 	// printf("%s\n", p);
+// }
 // int ft_memcmp(const void *s1, const void *s2, size_t n);
 // Deklar dyal function dialk
 

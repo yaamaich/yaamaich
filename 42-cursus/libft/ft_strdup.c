@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/23 12:27:51 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/04 02:04:19 by yaamaich         ###   ########.fr       */
+/*   Created: 2024/11/02 03:24:08 by yaamaich          #+#    #+#             */
+/*   Updated: 2024/11/03 04:55:38 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <stddef.h>
+#include <stdlib.h>
 
-size_t	ft_strlen(const char *c)
+char	*ft_strdup(const char *s1)
 {
+	char	*ptr;
 	size_t	i;
 
-	i = 0;
-	while (c[i])
-	{
-		i++;
-	}
-	return (i);
+	i = ft_strlen(s1);
+	ptr = malloc(i + 1);
+	if (!ptr)
+		return (NULL);
+	ft_memcpy(ptr, s1, i);
+	ptr[i] = '\0';
+	return (ptr);
 }

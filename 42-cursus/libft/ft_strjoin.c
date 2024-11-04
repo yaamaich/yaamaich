@@ -1,25 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/23 12:27:51 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/04 02:04:19 by yaamaich         ###   ########.fr       */
+/*   Created: 2024/11/03 04:21:59 by yaamaich          #+#    #+#             */
+/*   Updated: 2024/11/03 05:22:02 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
+#include <stdlib.h>
 
-size_t	ft_strlen(const char *c)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t	i;
-
-	i = 0;
-	while (c[i])
+	unsigned int i;
+	unsigned int j;
+	unsigned int k;
+	char *p;
+	
+	k = 0;
+	i = ft_strlen(s1);
+	j = ft_strlen(s2);
+	p = malloc(i + j + 1);
+	if (!p)
+	return (NULL);
+	while (s1[k])
 	{
+		p[k] = s1[k];
+		k++;
+	}
+	i = 0;
+	while (s2[i])
+	{
+		p[k] = s2[i];
+		k++;
 		i++;
 	}
-	return (i);
+	p[k] = '\0';
+	return (p);
+	free(p);
 }

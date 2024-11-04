@@ -6,14 +6,13 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 18:46:51 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/10/31 23:47:51 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/11/02 02:19:42 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stddef.h>
+#include <stdio.h>
 #include <string.h>
-
 
 void	*ft_memset(void *str, int c, size_t len)
 {
@@ -27,4 +26,3 @@ void	*ft_memset(void *str, int c, size_t len)
 	}
 	return (str);
 }
-
