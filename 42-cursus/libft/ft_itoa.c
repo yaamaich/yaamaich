@@ -1,34 +1,57 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 01:42:06 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/05 01:12:53 by yaamaich         ###   ########.fr       */
+/*   Created: 2024/11/06 03:14:05 by yaamaich          #+#    #+#             */
+/*   Updated: 2024/11/06 03:36:05 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
- char *ft_strmapi(const char *s, char (*f)(unsigned int, char))
- {
-	size_t i;
-	char *p;
-	
+static int	count_size(int n)
+{
+	int i;
+
 	i = 0;
-	if (!f)
-		return (NULL);
-	p = malloc (ft_strlen(s) + 1);
-	if (!p)
-		return (0);
-	while (s[i])
+	if (n < 0)
+		n *= -1;
+	while (n != 0)
 	{
-		p[i] = f(i, s[i]);
+		n /= 10;
 		i++;
 	}
-	p[i] = '\0';
-	return (p);
- }
- 
+	return (i);
+}
+
+char		*ft_itoa(int num)
+{
+	char		*dst;
+	int			count;
+	int			i;
+	long int	n;
+
+	n = num;
+	count = count_size(n);
+	i = 0;
+	if (n < 0 || count == 0)
+		count++;
+	if (!(dst = ft_strnew(count)))
+		return (NULL);
+	if (n < 0)
+	{
+		n *= -1;
+		dst[0] = '-';
+		i++;
+	}
+	while (count > i)
+	{
+		count--;
+		dst[count] = (n % 10) + '0';
+		n /= 10;
+	}
+	return (dst);
+}

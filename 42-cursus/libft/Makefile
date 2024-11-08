@@ -5,7 +5,8 @@ SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
 	   ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c \
 	   ft_atoi.c  ft_calloc.c ft_strdup.c ft_strlcat.c \
 	   ft_putchar_fd.c ft_putstr_fd.c ft_putnbr_fd.c ft_putendl_fd.c\
-	   ft_strjoin.c ft_substr.c ft_strmapi.c ft_striteri.c \
+	   ft_strjoin.c ft_substr.c ft_strmapi.c ft_striteri.c ft_strtrim.c \
+	    ft_split.c \
 
 OBJS = $(SRCS:.c=.o)
 NAME = libft.a
@@ -14,20 +15,21 @@ CC = cc
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror
 
-%.o: %.c
-	${CC} ${CFLAGS} -c $< -o $@
-
 ${NAME}: ${OBJS}
-	${LIBC} ${NAME} ${OBJS}
+	ar rc ${NAME} ${OBJS}
+
+%.o: %.c
+	cc -Wall -Wextra -Werror -c $< -o $@
 
 all: ${NAME}
 
 clean:
-	${RM} ${OBJS}
+	rm -f ${OBJS}
 
 fclean: clean
-	${RM} ${NAME}
+	rm -f ${NAME}
 
 re: fclean all
+
 
 .PHONY : all clean fclean re

@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/29 19:28:38 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/05 02:57:20 by yaamaich         ###   ########.fr       */
+/*   Created: 2024/11/04 02:29:39 by yaamaich          #+#    #+#             */
+/*   Updated: 2024/11/06 01:51:07 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stddef.h>
-#include <stdio.h>
 
-char	*ft_strrchr(const char *s, int c)
+
+char *ft_strtrim(char const *s1, char const *set)
 {
-	unsigned char	*ptr;
-	int				p;
-
-	ptr = (unsigned char *)s;
-	p = ft_strlen(s);
-	while (p >= 0)
-	{
-		if (ptr[p] == (unsigned char)c)
-			return ((char *)&s[p]);
-		p--;
-	}
-	return (NULL);
+	size_t i;
+	size_t len;
+	char *p;
+	
+	 i = 0;
+	while (s1[i] && ft_strchr(set, s1[i]))
+		i++;
+	len = ft_strlen(s1);
+	while (len > i && ft_strchr(set, s1[len - 1]))
+		len--;
+	p = malloc(len - i + 1);
+	if (!p)
+		return (NULL);
+	ft_memcpy(p,&s1[i],len - i);
+	p[len - i] = '\0'; 
+	return p;
 }
+
