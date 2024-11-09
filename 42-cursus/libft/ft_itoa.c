@@ -6,17 +6,20 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 03:14:05 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/06 03:36:05 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/11/09 00:43:11 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-static int	count_size(int n)
+int	count_size(int n)
 {
-	int i;
+	int	i;
 
 	i = 0;
+	if (n == 0)
+		return (1);
 	if (n < 0)
 		n *= -1;
 	while (n != 0)
@@ -27,19 +30,20 @@ static int	count_size(int n)
 	return (i);
 }
 
-char		*ft_itoa(int num)
+char	*ft_itoa(int num)
 {
 	char		*dst;
 	int			count;
 	int			i;
 	long int	n;
 
+	i = 0;
 	n = num;
 	count = count_size(n);
-	i = 0;
 	if (n < 0 || count == 0)
 		count++;
-	if (!(dst = ft_strnew(count)))
+	dst = ft_calloc(count + 1, sizeof(char));
+	if (!dst)
 		return (NULL);
 	if (n < 0)
 	{
@@ -47,9 +51,8 @@ char		*ft_itoa(int num)
 		dst[0] = '-';
 		i++;
 	}
-	while (count > i)
+	while (--count > i)
 	{
-		count--;
 		dst[count] = (n % 10) + '0';
 		n /= 10;
 	}

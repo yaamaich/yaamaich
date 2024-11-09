@@ -6,7 +6,7 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 05:19:41 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/03 23:36:50 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/11/09 00:03:11 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char *ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	i = ft_strlen(s);
 	if (len > i - start)
-		len = i - start;	
+		len = i - start;
 	if (start >= i)
 		return (ft_strdup(""));
 	p = malloc(len + 1);

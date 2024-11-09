@@ -6,7 +6,7 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 22:53:03 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/02 03:18:50 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/11/09 00:16:19 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,3 +28,4 @@ void	*ft_calloc(size_t count, size_t size)
 	}
 	return (ptr);
 }
+
