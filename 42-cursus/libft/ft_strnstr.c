@@ -6,13 +6,12 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 00:11:08 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/03 04:21:53 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/11/12 19:27:24 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-#include <stdio.h>
-#include <string.h>
+#include "libft.h"
+
 char	*ft_strnstr(const char *str1, const char *str2, size_t len)
 {
 	size_t	i;

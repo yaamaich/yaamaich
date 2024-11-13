@@ -6,12 +6,11 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 03:14:05 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/09 00:43:11 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/11/13 00:48:03 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 int	count_size(int n)
 {
@@ -51,7 +50,7 @@ char	*ft_itoa(int num)
 		dst[0] = '-';
 		i++;
 	}
-	while (--count > i)
+	while (count-- > i)
 	{
 		dst[count] = (n % 10) + '0';
 		n /= 10;

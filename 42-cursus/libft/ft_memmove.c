@@ -6,7 +6,7 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 01:50:22 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/03 02:57:35 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/11/10 14:02:37 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	if (c_dst > c_src)
 	{
 		while (len-- > 0)
-		{
 			c_dst[len] = c_src[len];
-		}
 	}
 	else
 	{

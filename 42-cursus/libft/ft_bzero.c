@@ -6,12 +6,11 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 10:33:17 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/10/31 23:52:08 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/11/12 19:24:53 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 void	*ft_bzero(void *s, size_t n)
 {

@@ -6,13 +6,11 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 03:24:08 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/03 04:55:38 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/11/12 19:26:47 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stddef.h>
-#include <stdlib.h>
 
 char	*ft_strdup(const char *s1)
 {

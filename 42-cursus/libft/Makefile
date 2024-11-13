@@ -8,7 +8,10 @@ SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
 	   ft_strjoin.c ft_substr.c ft_strmapi.c ft_striteri.c ft_strtrim.c \
 	    ft_split.c ft_itoa.c \
 
+SRB = ft_lstnew.c
+
 OBJS = $(SRCS:.c=.o)
+OBJ = $(SRB:.c=.o)
 NAME = libft.a
 LIBC = ar rc
 CC = cc
@@ -18,16 +21,20 @@ CFLAGS = -Wall -Wextra -Werror
 ${NAME}: ${OBJS}
 	ar rc ${NAME} ${OBJS}
 
-%.o: %.c
-	cc -Wall -Wextra -Werror -c $< -o $@
 
 all: ${NAME}
 
+bonus: ${OBJ}
+	ar rc ${NAME} ${OBJ}
+
+%.o: %.c
+	cc -Wall -Wextra -Werror -c $< -o $@
+	
 clean:
-	rm -f ${OBJS}
+	rm -f ${OBJS}  ${OBJ}
 
 fclean: clean
-	rm -f ${NAME}
+	rm -f ${NAME} 
 
 re: fclean all
 

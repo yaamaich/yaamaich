@@ -6,18 +6,18 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 00:33:21 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/08 21:48:08 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/11/13 02:30:08 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
 #include "libft.h"
 
-int count_word(char *p, char c)
+int	count_word(char *p, char c)
 {
-	int i;
-	int count = 0;
+	int	i;
+	int	count;
+
+	count = 0;
 	i = 0;
 	while (p[i])
 	{
@@ -25,20 +25,26 @@ int count_word(char *p, char c)
 			count++;
 		i++;
 	}
-	return count;
+	return (count);
 }
 
-char **ft_split(char const *s, char c)
+static void	free_split(char **split, int j)
 {
-	int i = 0;
-	int j = 0;
+    for (int k = 0; k < j; k++)
+        free(split[k]);
+    free(split);
+}
+char	**ft_split(char const *s, char c)
+{
+	char	**split;
+	int	i;
+	int	j;
 	int start;
-	char **split;
 
-	split = malloc((count_word((char *)s, c) + 1)* sizeof(char *));
-	if (!split)
-		return NULL;
-
+	i = 0;
+	j = 0;
+	if (!s || !(split = malloc((count_word((char *)s, c) + 1) * sizeof(char *))))
+		return (NULL);
 	while (s[i])
 	{
 		while (s[i] == c)
@@ -48,26 +54,11 @@ char **ft_split(char const *s, char c)
 			start = i;
 			while (s[i] && s[i] != c)
 				i++;
-			split[j++] = ft_substr(s, start, i - start);
+			if (!(split[j++] = ft_substr(s, start, i - start)))
+				return (free_split(split, j - 1), NULL);
 		}
 	}
 	split[j] = NULL;
-	return split;
+	return (split);
 }
 
-// int main()
-// {
-// 	char str[] = "yahya amaiche yea ddd";
-// 	char **result = ft_split(str, ' ');
-// 	int i = 0;
-
-// 	while (result[i])
-// 	{
-// 		printf("Word %d: %s\n", i, result[i]);
-// 		free(result[i]);
-// 		i++;
-// 	}
-// 	free(result);
-
-// 	return 0;
-// }

@@ -6,11 +6,11 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 23:28:45 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/03 01:40:36 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/11/12 19:25:51 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libft.h"
 
 void	ft_putchar_fd(char c, int fd)
 {

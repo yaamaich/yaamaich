@@ -6,9 +6,11 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 22:46:37 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/02 02:21:31 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/11/12 19:27:48 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_tolower(int c)
 {

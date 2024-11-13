@@ -6,12 +6,12 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 05:08:30 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/09 00:22:40 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/11/12 19:24:49 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
+#include "libft.h"
+
 int	ft_atoi(const char *str)
 {
 	int	i;

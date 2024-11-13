@@ -6,12 +6,11 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 12:28:42 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/10/31 22:31:52 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/11/12 19:25:05 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
+#include "libft.h"
 
 int	ft_isalnum(int str)
 {

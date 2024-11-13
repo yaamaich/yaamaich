@@ -6,22 +6,18 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 05:19:41 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/09 00:03:11 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/11/13 00:55:05 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
-#include <stddef.h>
-#include <stddef.h>
 
-
-char *ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	unsigned int i;
-	unsigned int k;
-	char *p;
-	
+	unsigned int	i;
+	unsigned int	k;
+	char			*p;
+
 	k = 0;
 	if (!s)
 		return (NULL);

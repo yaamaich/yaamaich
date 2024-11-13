@@ -6,11 +6,11 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 19:18:41 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/02 02:20:17 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/11/12 19:25:35 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {

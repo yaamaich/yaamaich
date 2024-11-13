@@ -6,11 +6,11 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 06:48:00 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/02 02:21:05 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/11/12 19:27:18 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
 
 int	ft_strncmp(const char *str1, const char *str2, size_t n)
 {

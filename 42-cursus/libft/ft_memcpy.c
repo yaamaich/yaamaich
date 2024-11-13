@@ -6,12 +6,11 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 12:44:56 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/02 01:17:37 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/11/12 19:25:40 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-#include <stdio.h>
+#include "libft.h"
 
 void	*ft_memcpy(void *to, const void *from, size_t c)
 {
