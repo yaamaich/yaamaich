@@ -6,7 +6,7 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 00:33:21 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/13 02:30:08 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/11/14 01:08:26 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,26 @@ int	count_word(char *p, char c)
 
 static void	free_split(char **split, int j)
 {
-    for (int k = 0; k < j; k++)
-        free(split[k]);
-    free(split);
-}
-char	**ft_split(char const *s, char c)
-{
-	char	**split;
-	int	i;
-	int	j;
-	int start;
+	int	k;
 
-	i = 0;
+	k = 0;
+	while (k < j)
+	{
+		free(split[k]);
+		k++;
+	}
+	free(split);
+}
+
+char	**ft_split2(char const *s, char c, char **split, int i)
+{
+	int	j;
+	int	start;
+
 	j = 0;
-	if (!s || !(split = malloc((count_word((char *)s, c) + 1) * sizeof(char *))))
+	start = 0;
+	split = malloc((count_word((char *)s, c) + 1) * sizeof(char *));
+	if (!s || !split)
 		return (NULL);
 	while (s[i])
 	{
@@ -54,7 +60,8 @@ char	**ft_split(char const *s, char c)
 			start = i;
 			while (s[i] && s[i] != c)
 				i++;
-			if (!(split[j++] = ft_substr(s, start, i - start)))
+			split[j++] = ft_substr(s, start, i - start);
+			if (!split[j])
 				return (free_split(split, j - 1), NULL);
 		}
 	}
@@ -62,3 +69,13 @@ char	**ft_split(char const *s, char c)
 	return (split);
 }
 
+char	**ft_split(char const *s, char c)
+{
+	char	**split;
+	int		i;
+
+	split = NULL;
+	i = 0;
+	split = ft_split2(s, c, split, i);
+	return (split);
+}

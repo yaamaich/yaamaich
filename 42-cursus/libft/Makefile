@@ -8,7 +8,7 @@ SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
 	   ft_strjoin.c ft_substr.c ft_strmapi.c ft_striteri.c ft_strtrim.c \
 	    ft_split.c ft_itoa.c \
 
-SRB = ft_lstnew.c
+SRB = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c
 
 OBJS = $(SRCS:.c=.o)
 OBJ = $(SRB:.c=.o)
