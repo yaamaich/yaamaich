@@ -6,7 +6,7 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 03:54:05 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/12 19:27:03 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/11/18 10:40:10 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,18 @@
 
 size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
+	size_t	i;
 	size_t	src_len;
 
+	i = 0;
 	src_len = ft_strlen((char *)src);
 	if (!dest || size == 0)
 		return (src_len);
-	if (src_len + 1 < size)
-		ft_memcpy(dest, src, src_len + 1);
-	else
+	while (src[i] && i < size - 1)
 	{
-		ft_memcpy(dest, src, size - 1);
-		dest[size - 1] = '\0';
+		dest[i] = src[i];
+		i++;
 	}
+	dest[i] = '\0';
 	return (src_len);
 }

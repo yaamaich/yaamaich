@@ -6,7 +6,7 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 00:11:08 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/12 19:27:24 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/11/17 03:28:42 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ char	*ft_strnstr(const char *str1, const char *str2, size_t len)
 	j = 0;
 	if (!*str2)
 		return ((char *)str1);
+	if (str1 == NULL && len == 0)
+		return (NULL);
 	while (str1[i] && i < len)
 	{
 		if (str1[i] == str2[0])

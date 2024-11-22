@@ -6,21 +6,24 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 03:14:05 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/13 00:48:03 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/11/19 16:55:40 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	count_size(int n)
+static int	count_size(int n)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	if (n == 0)
 		return (1);
 	if (n < 0)
+	{
 		n *= -1;
+		i++;
+	}
 	while (n != 0)
 	{
 		n /= 10;
@@ -29,31 +32,30 @@ int	count_size(int n)
 	return (i);
 }
 
-char	*ft_itoa(int num)
+char	*ft_itoa(int n)
 {
-	char		*dst;
-	int			count;
-	int			i;
-	long int	n;
+	size_t	size;
+	char	*res;
 
-	i = 0;
-	n = num;
-	count = count_size(n);
-	if (n < 0 || count == 0)
-		count++;
-	dst = ft_calloc(count + 1, sizeof(char));
-	if (!dst)
+	if (n == 0)
+		return (ft_strdup("0"));
+	else if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	size = count_size(n);
+	res = malloc((size + 1) * sizeof(char));
+	if (!res)
 		return (NULL);
 	if (n < 0)
 	{
-		n *= -1;
-		dst[0] = '-';
-		i++;
+		n = -n;
+		res[0] = '-';
 	}
-	while (count-- > i)
+	res[size] = '\0';
+	while (n)
 	{
-		dst[count] = (n % 10) + '0';
+		size--;
+		res[size] = n % 10 + 48;
 		n /= 10;
 	}
-	return (dst);
+	return (res);
 }

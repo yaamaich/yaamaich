@@ -6,7 +6,7 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 02:29:39 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/13 00:55:22 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/11/17 03:39:37 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ char	*ft_strtrim(char const *s1, char const *set)
 	char	*p;
 
 	i = 0;
+	if (!s1 || !set)
+		return (NULL);
+	if (s1[0] == '\0')
+		return (ft_strdup(""));
 	while (s1[i] && ft_strchr(set, s1[i]))
 		i++;
 	len = ft_strlen(s1);
 	while (len > i && ft_strchr(set, s1[len - 1]))
 		len--;
-	p = malloc(len - i + 1);
-	if (!p)
-		return (NULL);
-	ft_memcpy(p, &s1[i], len - i);
-	p[len - i] = '\0';
+	p = ft_substr(s1, i, len - i);
 	return (p);
 }

@@ -6,7 +6,7 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 01:42:06 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/13 00:55:34 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/11/17 03:19:41 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strmapi(const char *s, char (*f)(unsigned int, char))
 	char	*p;
 
 	i = 0;
-	if (!f)
+	if (!s || !f)
 		return (NULL);
 	p = malloc(ft_strlen(s) + 1);
 	if (!p)

@@ -8,35 +8,36 @@ SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
 	   ft_strjoin.c ft_substr.c ft_strmapi.c ft_striteri.c ft_strtrim.c \
 	    ft_split.c ft_itoa.c \
 
-SRB = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c
+SRB = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c ft_lstlast_bonus.c ft_lstadd_back_bonus.c \
+	  ft_lstdelone_bonus.c ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c
 
 OBJS = $(SRCS:.c=.o)
 OBJ = $(SRB:.c=.o)
 NAME = libft.a
-LIBC = ar rc
 CC = cc
-RM = rm -f
 CFLAGS = -Wall -Wextra -Werror
-
-${NAME}: ${OBJS}
-	ar rc ${NAME} ${OBJS}
-
 
 all: ${NAME}
 
-bonus: ${OBJ}
-	ar rc ${NAME} ${OBJ}
+${NAME}: ${OBJS}
+	ar rcs ${NAME} $?
 
-%.o: %.c
-	cc -Wall -Wextra -Werror -c $< -o $@
-	
+bonus: .bonus
+
+.bonus: ${OBJ}
+	ar rcs ${NAME} $?
+	@touch .bonus
+
+%.o: %.c libft.h
+	${CC} ${CFLAGS} -c $< -o $@
+
 clean:
-	rm -f ${OBJS}  ${OBJ}
+	rm -f ${OBJS}  ${OBJ} .bonus
 
 fclean: clean
-	rm -f ${NAME} 
+	rm -f ${NAME}
 
 re: fclean all
 
 
-.PHONY : all clean fclean re
+.PHONY : clean bonus all fclean re

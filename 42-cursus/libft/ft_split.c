@@ -6,17 +6,19 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 00:33:21 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/14 01:08:26 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/11/22 20:32:22 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	count_word(char *p, char c)
+static int	count_word(char *p, char c)
 {
 	int	i;
 	int	count;
 
+	if (!p)
+		return (0);
 	count = 0;
 	i = 0;
 	while (p[i])
@@ -33,7 +35,7 @@ static void	free_split(char **split, int j)
 	int	k;
 
 	k = 0;
-	while (k < j)
+	while (k <= j)
 	{
 		free(split[k]);
 		k++;
@@ -41,7 +43,7 @@ static void	free_split(char **split, int j)
 	free(split);
 }
 
-char	**ft_split2(char const *s, char c, char **split, int i)
+static char	**ft_split2(char const *s, char c, char **split, int i)
 {
 	int	j;
 	int	start;
@@ -60,9 +62,10 @@ char	**ft_split2(char const *s, char c, char **split, int i)
 			start = i;
 			while (s[i] && s[i] != c)
 				i++;
-			split[j++] = ft_substr(s, start, i - start);
+			split[j] = ft_substr(s, start, i - start);
 			if (!split[j])
 				return (free_split(split, j - 1), NULL);
+			j++;
 		}
 	}
 	split[j] = NULL;
@@ -76,6 +79,5 @@ char	**ft_split(char const *s, char c)
 
 	split = NULL;
 	i = 0;
-	split = ft_split2(s, c, split, i);
-	return (split);
+	return (ft_split2(s, c, split, i));
 }
