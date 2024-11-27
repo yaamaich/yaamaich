@@ -6,13 +6,13 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 01:16:27 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/25 23:54:31 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/11/26 22:50:31 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-int print_format(char specifier, va_list ap)
+int	print_format(char specifier, va_list ap)
 {
 	int	count;
 
@@ -22,18 +22,17 @@ int print_format(char specifier, va_list ap)
 	else if (specifier == 's')
 		count = ft_putstr(va_arg(ap, char *));
 	else if (specifier == 'd' || specifier == 'i')
-		count = ft_putnbr((long)va_arg(ap, int), 10 , specifier);
+		count = ft_putnbr((long)va_arg(ap, int), 10, specifier);
 	else if (specifier == 'u')
 		count = ft_putunsnbr((long)va_arg(ap, int));
 	else if (specifier == 'x' || specifier == 'X')
-		count = ft_putnbr((long)va_arg(ap,unsigned int),16 , specifier);
+		count = ft_putnbr((long)va_arg(ap, unsigned int), 16, specifier);
 	else if (specifier == 'p')
-		count = ft_putptr(va_arg(ap,void *));
+		count = ft_putptr(va_arg(ap, void *));
 	else
 		count += write(1, &specifier, 1);
-	return count;
+	return (count);
 }
-
 
 int	ft_printf(const char *format, ...)
 {
@@ -42,23 +41,23 @@ int	ft_printf(const char *format, ...)
 
 	va_start(ap, format);
 	count = 0;
-	
+	if (write(1,0,0) == -1)
+	{
+		return (-1);
+	}
 	while (*format)
 	{
-		if (*format == '%')
-			{
-				format++;
-				if (!*format)
-					return count;
-				count += print_format(*format, ap);
-			}
-		else 
+		if (*format == '%' && *format + 1)
+		{
+			format++;
+			if (!*format)
+				return (count);
+			count += print_format(*format, ap);
+		}
+		else
 			count += write(1, format, 1);
 		format++;
 	}
 	va_end(ap);
-	return count;
+	return (count);
 }
-
-
-

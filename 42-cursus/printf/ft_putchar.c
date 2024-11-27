@@ -6,13 +6,13 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 00:49:17 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/25 21:53:00 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/11/26 18:01:55 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-int ft_putchar (char c)
+int	ft_putchar(char c)
 {
-	return (write (1, &c, 1));
+	return (write(1, &c, 1));
 }
