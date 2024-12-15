@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imatouil <imatouil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yup <yup@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 20:17:06 by imatouil          #+#    #+#             */
-/*   Updated: 2024/12/10 15:01:50 by imatouil         ###   ########.fr       */
+/*   Updated: 2024/12/15 23:50:01 by yup              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static char	*ft_free(char *str)
 	str = NULL;
 	return (NULL);
 }
+
 
 static int	ft_count(char *str)
 {
