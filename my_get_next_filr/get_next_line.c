@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/16 17:18:05 by yaamaich          #+#    #+#             */
+/*   Updated: 2024/12/16 17:37:05 by yaamaich         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 static char *ft_free(char *str)
@@ -78,6 +90,5 @@ char *get_next_line(int fd)
 	tmp = ft_substr(str, ft_count(str), ft_strlen(str) - ft_count(str));
 	free(str);
 	str = tmp;
-	printf("%s\n" , str);
 	return (line);
 }
