@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yup <yup@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 20:17:06 by imatouil          #+#    #+#             */
-/*   Updated: 2024/12/15 23:50:01 by yup              ###   ########.fr       */
+/*   Updated: 2024/12/16 00:00:14 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,11 @@ static char	*ft_get_line(char *str)
 	ptr[i] = '\0';
 	return (ptr);
 }
-
+static char *ft_error(char *str)
+{
+	ft_free(str);
+	return (NULL);
+}
 static char	*ft_read(int fd, char *str)
 {
 	char	*buffer;
@@ -62,6 +66,8 @@ static char	*ft_read(int fd, char *str)
 
 	if (!str)
 		str = ft_strdup("");
+	if (!str)
+		ft_error(str);
 	num = 1;
 	buffer = (char *)malloc(BUFFER_SIZE + 1);
 	if (!buffer)
