@@ -1,14 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_file_utils_bonus.c                        :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/16 17:16:48 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/12/16 17:16:57 by yaamaich         ###   ########.fr       */
+/*   Created: 2024/12/16 01:20:24 by yaamaich          #+#    #+#             */
+/*   Updated: 2024/12/17 00:06:39 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "get_next_line.h"
 
@@ -17,10 +18,10 @@ size_t	ft_strlen(char *c)
 	size_t	i;
 
 	i = 0;
+	if (!c)
+		return (0);
 	while (c[i])
-	{
 		i++;
-	}
 	return (i);
 }
 
@@ -54,7 +55,8 @@ char	*ft_strchr(char *str, int ch)
 {
 	unsigned char	*ptr;
 	int				p;
-
+	if (!str)
+        return (NULL);
 	ptr = (unsigned char *)str;
 	p = ft_strlen(str);
 	while (p >= 0)
@@ -75,8 +77,10 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	k = 0;
 	i = 0;
-	if (!s1 || !s2)
-		return (NULL);
+	if (!s1)
+    	return (ft_strdup(s2));
+	if (!s2)
+    	return (ft_strdup(s1));
 	p = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!p)
 		return (NULL);
@@ -93,9 +97,11 @@ char	*ft_strdup(char *s)
 {
 	char *ptr;
 	int len;
-
+	
+	if (!s)
+    	return (ft_strdup(""));
 	len = ft_strlen(s);
-	ptr = (char *)malloc(sizeof(char) * (len + 1));
+	ptr = malloc(len + 1);
 	if (!ptr)
 		return (NULL);
 	ptr[len] = '\0';

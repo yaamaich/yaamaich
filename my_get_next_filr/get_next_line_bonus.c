@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_file_bonus.c                              :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yup <yup@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:17:13 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/12/16 19:41:09 by yup              ###   ########.fr       */
+/*   Updated: 2024/12/17 02:46:34 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,10 @@ char *get_next_line(int fd)
 	if (fd > 10240)
 		return (NULL);
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, NULL, 0) < 0);
-		return (NULL);
+		return (free(str), str[fd] = NULL, NULL);
 	str[fd] = ft_read(fd , str[fd]);
 	if (!str || str[fd][0] == '\0')
-		return (ft_free(str[fd]));
+		return (free(str), str[fd] = NULL, NULL);
 	line = ft_get_line(str[fd]);
 	tmp = ft_substr(str[fd], ft_count(str[fd]), ft_strlen(str[fd]) - ft_count(str[fd]));
 	free(str[fd]);

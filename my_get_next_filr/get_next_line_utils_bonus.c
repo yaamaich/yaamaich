@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_file_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/16 01:20:24 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/12/16 02:48:14 by yaamaich         ###   ########.fr       */
+/*   Created: 2024/12/16 17:16:48 by yaamaich          #+#    #+#             */
+/*   Updated: 2024/12/16 23:46:03 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(char *c)
 {
 	size_t	i;
 
 	i = 0;
+	if (!c)
+		return (0);
 	while (c[i])
-	{
 		i++;
-	}
 	return (i);
 }
 
@@ -92,9 +91,10 @@ char	*ft_strjoin(char *s1, char *s2)
 
 char	*ft_strdup(char *s)
 {
-	char	*ptr;
-	int		len;
-
+	char *ptr;
+	int len;
+	if (!s)
+		return (NULL);
 	len = ft_strlen(s);
 	ptr = (char *)malloc(sizeof(char) * (len + 1));
 	if (!ptr)
