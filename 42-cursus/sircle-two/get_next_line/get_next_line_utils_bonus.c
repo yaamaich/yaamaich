@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/16 01:20:24 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/12/17 00:06:39 by yaamaich         ###   ########.fr       */
+/*   Created: 2024/12/16 17:16:48 by yaamaich          #+#    #+#             */
+/*   Updated: 2024/12/20 12:20:28 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line_bonus.h"
 
-#include "get_next_line.h"
-
-size_t	ft_strlen(char *c)
+size_t	ft_strlen(const char *c)
 {
 	size_t	i;
 
@@ -25,7 +24,7 @@ size_t	ft_strlen(char *c)
 	return (i);
 }
 
-char	*ft_substr(char *s, unsigned int start, size_t len)
+char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
 	unsigned int	i;
 	unsigned int	k;
@@ -51,12 +50,14 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 	p[k] = '\0';
 	return (p);
 }
-char	*ft_strchr(char *str, int ch)
+
+char	*ft_strchr(const char *str, int ch)
 {
 	unsigned char	*ptr;
 	int				p;
+
 	if (!str)
-        return (NULL);
+		return (NULL);
 	ptr = (unsigned char *)str;
 	p = ft_strlen(str);
 	while (p >= 0)
@@ -69,7 +70,7 @@ char	*ft_strchr(char *str, int ch)
 	return (NULL);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin(const char *s1, const char *s2)
 {
 	unsigned int	i;
 	unsigned int	k;
@@ -77,10 +78,10 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	k = 0;
 	i = 0;
-	if (!s1)
-    	return (ft_strdup(s2));
-	if (!s2)
-    	return (ft_strdup(s1));
+	if (!s1 || !s2)
+		return (NULL);
+	if (ft_strlen(s1) == 0 && ft_strlen(s2) == 0)
+		return (NULL);
 	p = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!p)
 		return (NULL);
@@ -93,15 +94,15 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (p);
 }
 
-char	*ft_strdup(char *s)
+char	*ft_strdup(const char *s)
 {
-	char *ptr;
-	int len;
-	
+	char	*ptr;
+	int		len;
+
 	if (!s)
-    	return (ft_strdup(""));
+		return (ft_strdup(""));
 	len = ft_strlen(s);
-	ptr = malloc(len + 1);
+	ptr = (char *)malloc(sizeof(char) * (len + 1));
 	if (!ptr)
 		return (NULL);
 	ptr[len] = '\0';

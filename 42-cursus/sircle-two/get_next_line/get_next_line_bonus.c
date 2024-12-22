@@ -6,21 +6,15 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:17:13 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/12/17 02:46:34 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/12/18 22:32:44 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-static char *ft_free(char *str)
+static int	ft_count(char *str)
 {
-	free(str);
-	str = NULL;
-	return (NULL);
-}
-static int ft_count(char *str)
-{
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i] && str[i] != '\n')
@@ -29,17 +23,18 @@ static int ft_count(char *str)
 		i++;
 	return (i);
 }
-static char *ft_get_line(char *str)
+
+static char	*ft_get_line(char *str)
 {
-	char *ptr;
-	int i;
-	int k;
-	
+	char	*ptr;
+	int		i;
+	int		k;
+
 	i = 0;
-	if (!str)
+	if (!str || str[0] == '\0')
 		return (NULL);
 	k = ft_count(str);
-	ptr = malloc (k + 1);
+	ptr = malloc(k + 1);
 	if (!ptr)
 		return (NULL);
 	while (i < k)
@@ -47,50 +42,54 @@ static char *ft_get_line(char *str)
 		ptr[i] = str[i];
 		i++;
 	}
-	ptr[k] = '\0';
+	ptr[i] = '\0';
 	return (ptr);
 }
-static char *ft_read(int fd, char *str)
+
+static char	*ft_read(int fd, char *str)
 {
-	char *tmp;
-	char *buf;
-	int len;
+	char	*buf;
+	char	*tmp;
+	int		len;
 
 	if (!str)
 		str = ft_strdup("");
-	buf = malloc (BUFFER_SIZE + 1);
+	buf = malloc(BUFFER_SIZE + 1);
 	if (!buf)
-		return (NULL);
+		return (free(str), NULL);
 	len = 1;
 	while (len)
 	{
 		len = read(fd, buf, BUFFER_SIZE);
 		buf[len] = '\0';
-		tmp = ft_strjoin(str , buf); 
-		free (str);
+		tmp = ft_strjoin(str, buf);
+		free(str);
 		str = tmp;
-		if (!str || ft_strchr(str, '\n'))
-			break;
+		if (!str || ft_strchr(buf, '\n'))
+			break ;
 	}
-	free (buf);
+	free(buf);
 	return (str);
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-	static char *str[10240];
-	char *line;
-	char *tmp;
-	
-	if (fd > 10240)
+	static char	*str[10240];
+	char		*line;
+	char		*tmp;
+
+	if (fd < 0 || fd >= 10240)
 		return (NULL);
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, NULL, 0) < 0);
-		return (free(str), str[fd] = NULL, NULL);
-	str[fd] = ft_read(fd , str[fd]);
-	if (!str || str[fd][0] == '\0')
-		return (free(str), str[fd] = NULL, NULL);
+	if (BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+		return (free(str[fd]), str[fd] = NULL, NULL);
+	str[fd] = ft_read(fd, str[fd]);
+	if (!str[fd] || str[fd][0] == '\0')
+		return (free(str[fd]), str[fd] = NULL, NULL);
 	line = ft_get_line(str[fd]);
-	tmp = ft_substr(str[fd], ft_count(str[fd]), ft_strlen(str[fd]) - ft_count(str[fd]));
+	if (!line)
+		return (free(str[fd]), str[fd] = NULL, NULL);
+	tmp = ft_substr(str[fd], ft_count(str[fd]), ft_strlen(str[fd])
+			- ft_count(str[fd]));
 	free(str[fd]);
 	str[fd] = tmp;
 	return (line);

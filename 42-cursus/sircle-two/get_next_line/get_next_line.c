@@ -5,20 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/28 20:17:06 by imatouil          #+#    #+#             */
-/*   Updated: 2024/12/16 00:00:14 by yaamaich         ###   ########.fr       */
+/*   Created: 2024/12/16 17:18:05 by yaamaich          #+#    #+#             */
+/*   Updated: 2024/12/18 22:26:45 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-static char	*ft_free(char *str)
-{
-	free(str);
-	str = NULL;
-	return (NULL);
-}
-
 
 static int	ft_count(char *str)
 {
@@ -37,9 +29,9 @@ static char	*ft_get_line(char *str)
 	char	*ptr;
 	int		i;
 
-	if (!str)
+	if (!str || str[0] == '\0')
 		return (NULL);
-	ptr = (char *)malloc(ft_count(str) + 1);
+	ptr = malloc(ft_count(str) + 1);
 	if (!ptr)
 		return (NULL);
 	i = 0;
@@ -53,36 +45,32 @@ static char	*ft_get_line(char *str)
 	ptr[i] = '\0';
 	return (ptr);
 }
-static char *ft_error(char *str)
-{
-	ft_free(str);
-	return (NULL);
-}
+
 static char	*ft_read(int fd, char *str)
 {
-	char	*buffer;
+	char	*buf;
 	char	*tmp;
-	int		num;
+	int		len;
 
 	if (!str)
 		str = ft_strdup("");
 	if (!str)
-		ft_error(str);
-	num = 1;
-	buffer = (char *)malloc(BUFFER_SIZE + 1);
-	if (!buffer)
 		return (NULL);
-	while (num)
+	buf = malloc(BUFFER_SIZE + 1);
+	if (!buf)
+		return (free(str), NULL);
+	len = 1;
+	while (len)
 	{
-		num = read(fd, buffer, BUFFER_SIZE);
-		buffer[num] = '\0';
-		tmp = ft_strjoin(str, buffer);
+		len = read(fd, buf, BUFFER_SIZE);
+		buf[len] = '\0';
+		tmp = ft_strjoin(str, buf);
 		free(str);
 		str = tmp;
-		if (!str || ft_strchr(buffer, '\n'))
+		if (!str || ft_strchr(buf, '\n'))
 			break ;
 	}
-	free(buffer);
+	free(buf);
 	return (str);
 }
 
@@ -93,22 +81,13 @@ char	*get_next_line(int fd)
 	char		*tmp;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
-	{
-		free(str);
-		str = NULL;
-		return (NULL);
-	}
+		return (free(str), str = NULL, NULL);
 	str = ft_read(fd, str);
-	if (str[0] == '\0' || !str)
-	{
-		free(str);
-		str = NULL;
-		return (NULL);
-	}
+	if (!str || str[0] == '\0')
+		return (free(str), str = NULL, NULL);
 	line = ft_get_line(str);
-	
 	if (!line)
-		return (ft_free(str));
+		return (free(str), str = NULL, NULL);
 	tmp = ft_substr(str, ft_count(str), ft_strlen(str) - ft_count(str));
 	free(str);
 	str = tmp;
