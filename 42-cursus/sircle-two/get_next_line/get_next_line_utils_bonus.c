@@ -6,7 +6,7 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:16:48 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/12/20 12:20:28 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/12/23 00:16:09 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,7 @@ char	*ft_strjoin(const char *s1, const char *s2)
 
 	k = 0;
 	i = 0;
-	if (!s1 || !s2)
-		return (NULL);
-	if (ft_strlen(s1) == 0 && ft_strlen(s2) == 0)
+	if (!s2)
 		return (NULL);
 	p = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!p)

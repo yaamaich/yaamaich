@@ -6,7 +6,7 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:17:13 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/12/18 22:32:44 by yaamaich         ###   ########.fr       */
+/*   Updated: 2024/12/23 00:12:46 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ static char	*ft_read(int fd, char *str)
 
 	if (!str)
 		str = ft_strdup("");
+	if (!str)
+		return (NULL);
 	buf = malloc(BUFFER_SIZE + 1);
 	if (!buf)
 		return (free(str), NULL);
@@ -74,11 +76,11 @@ static char	*ft_read(int fd, char *str)
 
 char	*get_next_line(int fd)
 {
-	static char	*str[10240];
+	static char	*str[OPEN_MAX];
 	char		*line;
 	char		*tmp;
 
-	if (fd < 0 || fd >= 10240)
+	if (fd < 0 || fd >= OPEN_MAX)
 		return (NULL);
 	if (BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (free(str[fd]), str[fd] = NULL, NULL);
