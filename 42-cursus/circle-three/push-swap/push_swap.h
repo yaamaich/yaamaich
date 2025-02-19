@@ -10,6 +10,7 @@ typedef struct s_list
 }					t_list;
 
 void ft_sa(t_list *list);
+void	ft_ra(t_list *lst);
 void ft_pa(t_list **pa, int put);
 int		ft_lstsize(t_list *lst);
 t_list	*ft_lstnew(int content);

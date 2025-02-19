@@ -20,6 +20,7 @@ int main(int argc , char **argv)
 		}
 		ft_sa(head);
 		ft_pa(&head, 90);
+		ft_ra(head);
 		while (head)
 		{
 			printf("%d\n", head->content);
