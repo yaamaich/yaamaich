@@ -3,18 +3,23 @@
 #include <stdio.h>
 #include <limits.h>
 #include <stdlib.h>
-typedef struct s_list
-{
-	int			content;
-	struct s_list	*next;
-}					t_list;
+#include "libft/libft.h"
 
-void ft_sa(t_list *list);
+
+typedef struct s_swap
+{
+	t_list	*stack_a;
+	t_list	*stack_b;
+	int		asize;
+	int		bsize;
+}		t_swap;
+void 	ft_sa(t_list *list);
+void 	ft_sb(t_list *list);
 void	ft_ra(t_list *lst);
-void ft_pa(t_list **pa, int put);
-int		ft_lstsize(t_list *lst);
+void	ft_ss(t_list **stack_A, t_list **satck_B);
+void 	ft_pa(t_list **stack1, t_list **stack2);
+void 	ft_pb(t_list **stack1, t_list **stack2);
 t_list	*ft_lstnew(int content);
-int		ft_atoi(const char *str);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 void	ft_freelst(t_list *list);
 
