@@ -1,40 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/03 05:19:41 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/17 03:55:14 by yaamaich         ###   ########.fr       */
+/*   Created: 2024/11/19 20:02:02 by yaamaich          #+#    #+#             */
+/*   Updated: 2024/11/19 20:02:04 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	unsigned int	i;
-	unsigned int	k;
-	char			*p;
+	t_list	*new_list;
+	t_list	*new_node;
+	void	*new_content;
 
-	k = 0;
-	if (!s)
+	new_list = NULL;
+	if (!lst || !f || !del)
 		return (NULL);
-	i = ft_strlen(s);
-	if (len > i - start)
-		len = i - start;
-	if (start >= i)
-		return (ft_strdup(""));
-	p = malloc(len + 1);
-	if (!p)
-		return (NULL);
-	while (s[start] && k < len)
+	while (lst)
 	{
-		p[k] = s[start];
-		k++;
-		start++;
+		new_content = f(lst->content);
+		new_node = ft_lstnew(new_content);
+		ft_lstadd_back(&new_list, new_node);
+		if (!new_node)
+		{
+			del(new_content);
+			ft_lstclear(&new_list, del);
+			return (NULL);
+		}
+		lst = lst->next;
 	}
-	p[k] = '\0';
-	return (p);
+	return (new_list);
 }

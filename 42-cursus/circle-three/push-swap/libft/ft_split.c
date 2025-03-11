@@ -3,89 +3,81 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdecorte <jdecorte@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/01 12:18:31 by jdecorte          #+#    #+#             */
-/*   Updated: 2021/10/06 14:31:42 by jdecorte         ###   ########.fr       */
+/*   Created: 2024/11/07 00:33:21 by yaamaich          #+#    #+#             */
+/*   Updated: 2024/11/22 22:54:25 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	count_words(char const *s, char c)
+static int	count_word(char *p, char c)
 {
-	int		count;
-	int		i;
+	int	i;
+	int	count;
 
-	i = 0;
+	if (!p)
+		return (0);
 	count = 0;
-	while (s[i])
-	{
-		while (s[i] == c)
-			i++;
-		if (s[i] != c && s[i])
+	i = 0;
+	while (p[i])
+	{ // yahya is the best  one f 1337 a drari wlah 
+		if ((p[i] != c && (p[i + 1] == '\0' || p[i + 1] == c)))
 			count++;
-		while (s[i] != c && s[i])
-			i++;
+		i++;
 	}
 	return (count);
 }
 
-static void	ft_free_tab(char **tab)
+static void	free_split(char **split, int j)
 {
-	char	**pos;
+	int	k;
 
-	if (tab == NULL)
-		return ;
-	pos = tab;
-	while (*pos != NULL)
-		free(*(pos++));
-	free(tab);
+	k = 0;
+	while (k <= j)
+	{
+		free(split[k]);
+		k++;
+	}
+	free(split);
 }
 
-static char	*ft_str(char const *s, char c)
+static char	**ft_split2(char const *s, char c, char **split, int i)
 {
-	int		i;
-	char	*ptr;
+	int	j;
+	int	start;
 
-	i = 0;
-	while (s[i] && s[i] != c)
-		i++;
-	ptr = malloc(sizeof(char) * (i + 1));
-	if (!(ptr))
-	{
-		free(ptr);
+	j = 0;
+	start = 0;
+	split = malloc((count_word((char *)s, c) + 1) * sizeof(char *));
+	if (!s || !split)
 		return (NULL);
+	while (s[i])
+	{
+		while (s[i] == c)
+			i++;
+		if (s[i] != '\0')
+		{
+			start = i;
+			while (s[i] && s[i] != c)
+				i++;
+			split[j] = ft_substr(s, start, i - start);
+			if (!split[j])
+				return (free_split(split, j - 1), NULL);
+			j++;
+		}
 	}
-	ft_strlcpy(ptr, s, i + 1);
-	return (ptr);
+	split[j] = NULL;
+	return (split);
 }
 
 char	**ft_split(char const *s, char c)
 {
+	char	**split;
 	int		i;
-	int		strs_len;
-	char	**ptr;
 
-	if (!s)
-		return (0);
-	strs_len = count_words(s, c);
-	ptr = ft_calloc(sizeof(char *), (strs_len + 1));
-	if (!(ptr))
-		return (NULL);
-	i = -1;
-	while (++i < strs_len)
-	{
-		while (s[0] == c)
-			s++;
-		ptr[i] = ft_str(s, c);
-		if (!(ptr[i]))
-		{
-			ft_free_tab(ptr);
-			return (NULL);
-		}
-		s += ft_strlen(ptr[i]);
-	}
-	ptr[i] = 0;
-	return (ptr);
+	split = NULL;
+	i = 0;
+	return (ft_split2(s, c, split, i));
 }

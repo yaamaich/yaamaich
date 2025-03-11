@@ -1,46 +1,59 @@
-NAME = push_swap
-
+# Variables
 CC = gcc
+CFLAGS = -Wall -Wextra -Werror
+SRCS = push_swap.c \
+       libft/ft_calloc.c \
+       ft_rev_rotate.c \
+       ft_freelst.c \
+	   ft_push.c \
+	   check.c \
+	   ft_rotate.c \
+	   ft_swap.c  # لا تترك "\" في آخر سطر إذا لم يكن هناك ملف بعده
 
-CFLAGS = -Werror -Wall -Wextra -fsanitize=address
+OBJS = $(SRCS:.c=.o)
 
-RM = rm -rf
+# Add other source files here
+OBJS = $(SRCS:.c=.o)
+NAME = push_swap
+LIBFT = libft/libft.a
 
-SRCS = 	src/main.c\
-		src/index.c\
-		src/ope1.c\
-		src/ope2.c\
-		src/ope3.c\
-		src/ope4.c\
-		src/quick_sort.c\
-		src/sort_handler.c\
-		src/sort_utils.c\
-		libft/libft.a\
+# Rules
+all: $(NAME)
 
-SRCS_BONUS = src_bonus/checker_bonus.c\
-			src_bonus/ope1_bonus.c\
-			src_bonus/ope2_bonus.c\
-			src_bonus/ope3_bonus.c\
-			src_bonus/ope4_bonus.c\
-			src_bonus/utils_bonus.c\
-			libft/libft.a\
+$(NAME): $(OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT)
 
-$(NAME) :
-	make bonus -C libft
-	gcc $(CFLAGS) $(SRCS) -o $(NAME)
+# Dependencies
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
-all : $(NAME)
+libft/%.o: libft/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
-fclean : clean
-	$(RM) $(NAME)
-	make fclean -C libft
+# Phony
+.PHONY: all clean fclean re
 
-clean :
-	$(RM) $(NAME)
-	make clean -C libft
+$(LIBFT):
+	make -C libft
 
-re : fclean all
 
-bonus : 
-	make bonus -C libft
-	gcc $(CFLAGS) $(SRCS_BONUS) -o checker
+
+clean:
+	rm -f $(OBJS)
+	make -C libft clean
+
+fclean:	clean
+	rm -f $(NAME)
+	make -C libft fclean
+
+re:	fclean all
+
+# Dependencies
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+libft/%.o: libft/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Phony
+.PHONY: all clean fclean re

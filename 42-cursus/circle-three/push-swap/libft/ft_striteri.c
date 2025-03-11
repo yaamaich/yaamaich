@@ -3,19 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdecorte <jdecorte@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/06 13:45:40 by jdecorte          #+#    #+#             */
-/*   Updated: 2021/10/06 13:55:55 by jdecorte         ###   ########.fr       */
+/*   Created: 2024/11/04 02:07:13 by yaamaich          #+#    #+#             */
+/*   Updated: 2024/11/19 17:00:36 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	if (!s)
+	if (!s || !f)
 		return ;
 	while (s[i])
 	{

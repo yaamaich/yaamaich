@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdecorte <jdecorte@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/01 12:18:38 by jdecorte          #+#    #+#             */
-/*   Updated: 2021/10/06 14:34:31 by jdecorte         ###   ########.fr       */
+/*   Created: 2024/11/03 04:21:59 by yaamaich          #+#    #+#             */
+/*   Updated: 2024/11/15 18:29:59 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,22 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*res;
-	int		i;
-	int		j;
+	unsigned int	i;
+	unsigned int	k;
+	char			*p;
 
-	if (!s1 || !s2)
-		return (0);
+	k = 0;
 	i = 0;
-	res = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!res)
+	if (!s1 || !s2)
+		return (NULL);
+	p = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!p)
 		return (NULL);
 	while (s1[i])
-	{
-		res[i] = s1[i];
-		i++;
-	}
-	j = 0;
-	while (s2[j])
-	{
-		res[i] = s2[j];
-		i++;
-		j++;
-	}
-	res[i] = 0;
-	return (res);
+		p[k++] = (char)s1[i++];
+	i = 0;
+	while (s2[i])
+		p[k++] = (char)s2[i++];
+	p[k] = '\0';
+	return (p);
 }
