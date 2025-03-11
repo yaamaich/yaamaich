@@ -39,31 +39,55 @@ int main(int argc, char **argv)
             current = current->next;
             i++;
         }
+        current->next = NULL;
+        t_list *temp3 = head->stack_a;
+        while (temp3)
+        {
+            printf("%ld\n", temp3->content);
+            temp3 = temp3->next;
+        }
+        printf("check_a\n");
         ft_pb(&head->stack_b, &head->stack_a);
 		ft_pb(&head->stack_b, &head->stack_a);
 		t_list *temp1 = head->stack_b;
 		while (temp1)
         {
-            printf("%ld\n", temp1->content);
+            printf("%ld--\n", temp1->content);
             temp1 = temp1->next;
         }
-		ft_ss(&head->stack_a, &head->stack_b);
+        printf("push_b\n");
+        ft_rr(&head->stack_a, &head->stack_b);
+        t_list *temp4 = head->stack_a;
+        t_list *temp5 = head->stack_b;
+        while (temp4)
+        {
+            printf("%ld+\n", temp4->content);
+            temp4 = temp4->next;
+        }
+        printf("rotate_a\n");
+        while (temp5)
+        {
+            printf("%ld_\n", temp5->content);
+            temp5 = temp5->next;
+        }
+        printf("rotate_b\n");
 
+		ft_rrr(&head->stack_a, &head->stack_b);
         t_list *temp = head->stack_a;
 		
 		t_list *temp2 = head->stack_b;
-		
+		while (temp)
+        {
+            printf("%ld+\n", temp->content);
+            temp = temp->next;
+        }
+        printf("rrotate_a\n");
 		while (temp2)
         {
-            printf("%ld\n", temp2->content);
+            printf("%ld_\n", temp2->content);
             temp2 = temp2->next;
         }
-        // while (temp)
-        // {
-        //     printf("%ld\n", temp->content);
-        //     temp = temp->next;
-        // }
-
+        printf("rrotate_b\n");
         // تحرير الذاكرة
         free(head);
     }

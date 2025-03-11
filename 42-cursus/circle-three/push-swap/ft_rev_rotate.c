@@ -1,23 +1,24 @@
 #include "push_swap.h"
 
-t_list *ft_rr(t_list *lst)
+void    ft_rev(t_list **list)
 {
+    t_list *tmp = *list;
     t_list *current;
     int last_value;
     
-    if (!lst || !lst->next)
-        return NULL;
+    if (!tmp || !tmp->next)
+        return ;
         
     // Save the last value
-    current = lst;
+    current = tmp;
     while (current->next)
         current = current->next;
     last_value = current->content;
     
     // Start from the end, move each value forward
-    while (current != lst)
+    while (current != tmp)
     {
-        t_list *prev = lst;
+        t_list *prev = tmp;
         while (prev->next != current)
             prev = prev->next;
         current->content = prev->content;
@@ -25,6 +26,18 @@ t_list *ft_rr(t_list *lst)
     }
     
     // Put last value at the start
-    lst->content = last_value;
-	return lst;
+    tmp->content = last_value;
+}
+void ft_rra(t_list **lst)
+{
+    ft_rev(lst);
+}
+void ft_rrb(t_list **lst)
+{
+    ft_rev(lst);
+}
+void ft_rrr(t_list **stack_A, t_list **stack_B)
+{
+    ft_rra(stack_A);
+    ft_rrb(stack_B);
 }
