@@ -1,43 +1,46 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_rev_rotate.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/20 19:30:20 by yaamaich          #+#    #+#             */
+/*   Updated: 2025/03/20 23:35:43 by yaamaich         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void    ft_rev(t_list **list)
 {
     t_list *tmp = *list;
     t_list *current;
-    int last_value;
     
     if (!tmp || !tmp->next)
         return ;
         
     // Save the last value
-    current = tmp;
-    while (current->next)
-        current = current->next;
-    last_value = current->content;
-    
-    // Start from the end, move each value forward
-    while (current != tmp)
-    {
-        t_list *prev = tmp;
-        while (prev->next != current)
-            prev = prev->next;
-        current->content = prev->content;
-        current = prev;
-    }
-    
-    // Put last value at the start
-    tmp->content = last_value;
+    current = ft_lstlast(tmp);
+    while (tmp->next->next)
+        tmp = tmp->next;
+    current->next = *list;
+    tmp->next = NULL;
+    *list = current;
 }
 void ft_rra(t_list **lst)
 {
     ft_rev(lst);
+    ft_printf("rra\n");
 }
 void ft_rrb(t_list **lst)
 {
     ft_rev(lst);
+	ft_printf("rrb\n");
 }
 void ft_rrr(t_list **stack_A, t_list **stack_B)
 {
-    ft_rra(stack_A);
-    ft_rrb(stack_B);
+    ft_rev(stack_A);
+    ft_rev(stack_B);
+	ft_printf("rrr\n");
 }

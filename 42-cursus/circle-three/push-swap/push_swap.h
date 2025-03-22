@@ -4,7 +4,7 @@
 #include <limits.h>
 #include <stdlib.h>
 #include "libft/libft.h"
-
+#include "printf/ft_printf.h"
 
 typedef struct s_swap
 {
@@ -29,6 +29,7 @@ void	ft_lstadd_front(t_list **lst, t_list *new);
 void	ft_freelst(t_list *list);
 void    sort_5(t_list **stack_a, t_list **stack_b);
 void	sort_3(t_list **stack_a);
+void	sort_algo(t_swap **swap);
 
 
 
