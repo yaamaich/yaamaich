@@ -11,5 +11,5 @@ size_t	ft_strspn(const char *s, const char *accept)
 
 int main()
 {
-    printf("%zu", ft_strspn("banana", "ban"));
+    printf("%zu", ft_strspn("banana", "a"));
 }
