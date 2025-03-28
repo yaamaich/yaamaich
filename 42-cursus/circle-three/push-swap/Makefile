@@ -7,7 +7,8 @@ SRCS = push_swap.c \
        ft_push.c \
        check.c \
        ft_rotate.c \
-       ft_swap.c  
+       ft_swap.c  \
+							init.c
 
 OBJS = $(SRCS:.c=.o)
 NAME = push_swap

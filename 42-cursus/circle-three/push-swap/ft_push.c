@@ -12,27 +12,49 @@
 
 #include "push_swap.h"
 
-void ft_pa(t_list **stack1, t_list **stack2)
+void	ft_pa(t_list **a, t_list **b)
 {
-    t_list	*head_b;
+	t_list	*first_a;
 
-	if (!*stack2)
+	if (!a || !*a)
 		return ;
-	head_b = (*stack2)->next;
-	(*stack2)->next = *stack1;
-	*stack1 = *stack2;
-	*stack2 = head_b;
-	ft_printf("pa\n");
+	first_a = *a;
+	*a = (*a)->next;
+	if (*a)
+		(*a)->prev = NULL;
+	if (!*b)
+	{
+		*b = first_a;
+		(*b)->next = NULL;
+	}
+	else
+	{
+		first_a->next = *b;
+		(*b)->prev = first_a;
+		*b = first_a;
+	}
+	ft_printf("pb\n");
 }
-void ft_pb(t_list **stack_b, t_list **satck_a)
+void	ft_pb(t_list **a, t_list **b)
 {
-    t_list	*head_a;
-    
-    if (!*satck_a)
-        return ;
-    head_a = (*satck_a)->next;
-    (*satck_a)->next = *stack_b;
-    *stack_b = *satck_a;
-    *satck_a = head_a;
+	t_list	*first_a;
+
+	if (!a || !*a)
+		return ;
+	first_a = *a;
+	*a = (*a)->next;
+	if (*a)
+		(*a)->prev = NULL;
+	if (!*b)
+	{
+		*b = first_a;
+		(*b)->next = NULL;
+	}
+	else
+	{
+		first_a->next = *b;
+		(*b)->prev = first_a;
+		*b = first_a;
+	}
 	ft_printf("pb\n");
 }

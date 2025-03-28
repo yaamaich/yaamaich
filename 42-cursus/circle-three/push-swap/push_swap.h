@@ -13,6 +13,7 @@ typedef struct s_swap
 	int		asize;
 	int		bsize;
 }		t_swap;
+
 void 	ft_sa(t_list **list);
 void 	ft_sb(t_list **list);
 void	ft_ra(t_list **lst);
@@ -30,7 +31,11 @@ void	ft_freelst(t_list *list);
 void    sort_5(t_list **stack_a, t_list **stack_b);
 void	sort_3(t_list **stack_a);
 void	sort_algo(t_swap **swap);
-
+int	is_sorted(t_list *list);
+int	ft_check_double(t_list *lst, int k);
+void	ft_usesplit(char *str, t_swap **sswap);
+void	initstack(int size, char **str);
+void	check_sorting(t_swap **llst);
 
 
 #endif

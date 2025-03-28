@@ -6,7 +6,7 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 05:08:30 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/18 12:36:32 by yaamaich         ###   ########.fr       */
+/*   Updated: 2025/03/28 02:32:31 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,7 @@ int	ft_atoi(const char *str)
 			return (0);
 		i++;
 	}
+	// if (!(str[i] >= '0' && str[i] <= '9') && str[i] != '\0')
+	// 	ft_exit_error();
 	return (result * sign);
 }

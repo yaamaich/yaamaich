@@ -6,7 +6,7 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 00:52:26 by yaamaich          #+#    #+#             */
-/*   Updated: 2025/03/21 07:57:39 by yaamaich         ###   ########.fr       */
+/*   Updated: 2025/03/28 07:26:44 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,16 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+
 typedef struct s_list
 {
 	int			content;
 	int			index;
-	struct s_list	*next;
+	struct	s_list	*next;
+	struct	s_list	*prev;
 }					t_list;
 
+void	ft_exit_error(void);
 void				*ft_calloc(size_t count, size_t size);
 void				*ft_bzero(void *s, size_t n);
 int					ft_isprint(int c);

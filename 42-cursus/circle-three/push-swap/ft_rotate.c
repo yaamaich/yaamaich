@@ -14,14 +14,16 @@
 
 static void	ft_r(t_list **stack)
 {
-	t_list	*head;
+	t_list	*first;
+	t_list	*last;
 
-	head = *stack;
-	if (!(*stack) || !((*stack)->next))
-		return ;
-	*stack = head->next;
-	head->next = NULL;
-	ft_lstlast(*stack)->next = head;
+	first = *stack;
+	last = ft_lstlast(*stack);
+	*stack = (*stack)->next;
+	(*stack)->prev = NULL;
+	last->next = first;
+	first->next = NULL;
+	first->prev = last;
 }
 void	ft_ra(t_list **lst)
 {

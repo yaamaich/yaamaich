@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_exite.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahouass <ahouass@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/09 15:11:12 by ahouass           #+#    #+#             */
-/*   Updated: 2025/01/09 15:11:49 by ahouass          ###   ########.fr       */
+/*   Created: 2025/03/28 02:09:27 by yaamaich          #+#    #+#             */
+/*   Updated: 2025/03/28 02:09:59 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strcmp(char *s1, char *s2)
+void	ft_exit_error(void)
 {
-	int	i;
-
-	i = 0;
-	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
-		i++;
-	return (s1[i] - s2[i]);
+ ft_putstr_fd("Error\n", 2);
+	exit(EXIT_FAILURE);
 }
