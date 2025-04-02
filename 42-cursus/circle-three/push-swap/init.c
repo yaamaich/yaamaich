@@ -6,7 +6,7 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 03:03:50 by yaamaich          #+#    #+#             */
-/*   Updated: 2025/03/28 08:01:50 by yaamaich         ###   ########.fr       */
+/*   Updated: 2025/04/02 22:52:51 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,21 @@ void	ft_free_split(char **split)
 	}
 	free(split);
 }
-void ft_digit(char *str)
+int ft_digit(char *str)
 {
 	int i = 0;
 	if (str[i] == '-' || str[i] == '+')
 		i++;
+	if(!str[i])
+		return 0;
+
 	while (str[i])
 	{
 		if (ft_isdigit(str[i])== 0)
-			ft_exit_error();
+			return 0;
 		i++;
 	}
+	return 1;
 }
 int	is_sorted(t_list *list)
 {
@@ -73,15 +77,21 @@ void	ft_usesplit(char *str, t_swap **sswap)
 	c = ft_split(str, ' ');
 	while (c[k])
 	{	
-		ft_digit(c[k]);
-		if (ft_check_double((*sswap)->stack_a, ft_atoi(c[k])) == 1)
+		if (ft_digit(c[k]) == 0)
+		{
+			ft_free_split(c);
 			ft_exit_error();
+		}
+		if (ft_check_double((*sswap)->stack_a, ft_atoi(c[k])) == 1)
+		{
+			ft_free_split(c);
+			ft_exit_error();
+		}
 		if ((*sswap)->stack_a == NULL)
 			(*sswap)->stack_a = ft_lstnew((ft_atoi(c[k])));
 		else
 			ft_lstadd_back(&(*sswap)->stack_a, ft_lstnew(ft_atoi(c[k])));
 		(*sswap)->asize++;
-		(*sswap)->stack_a->index++;
 		k++;
 	}
 	ft_free_split(c);
@@ -92,6 +102,8 @@ void	initstack(int size, char **str)
 	int		i;
 
 	swap = malloc(sizeof(t_swap));
+	if (!swap)
+		return ;
 	swap->stack_a = NULL;
 	swap->stack_b = NULL;
 	swap->asize = 0;
@@ -103,5 +115,7 @@ void	initstack(int size, char **str)
 		ft_usesplit(str[i], &swap);
 		i++;
 	}
+	assign_index(&swap->stack_a);
 	check_sorting(&swap);
+	ft_freeswap(swap);
 }

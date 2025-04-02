@@ -6,24 +6,39 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 19:30:20 by yaamaich          #+#    #+#             */
-/*   Updated: 2025/03/28 07:32:43 by yaamaich         ###   ########.fr       */
+/*   Updated: 2025/04/02 18:24:41 by yaamaich         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_rev_rotate.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/20 19:30:20 by yaamaich          #+#    #+#             */
+/*   Updated: 2025/03/20 23:35:43 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void    ft_rev(t_list **lst)
+void    ft_rev(t_list **list)
 {
-	t_list	*first;
-	t_list	*last;
-
-	first = *lst;
-	last = ft_lstlast(*lst);
-	last->prev->next = NULL;
-	last->prev = NULL;
-	last->next = first;
-	first->prev = last;
-	*lst = last;
+    t_list *tmp = *list;
+    t_list *current;
+    
+    if (!tmp || !tmp->next)
+        return ;
+        
+    // Save the last value
+    current = ft_lstlast(tmp);
+    while (tmp->next->next)
+        tmp = tmp->next;
+    current->next = *list;
+    tmp->next = NULL;
+    *list = current;
 }
 void ft_rra(t_list **lst)
 {

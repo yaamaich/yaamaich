@@ -6,44 +6,41 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 19:30:10 by yaamaich          #+#    #+#             */
-/*   Updated: 2025/03/28 07:25:52 by yaamaich         ###   ########.fr       */
+/*   Updated: 2025/04/02 20:54:23 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void ft_s(t_list **lst)
+void	ft_swap(t_list **a)
 {
 	t_list	*first;
 	t_list	*second;
 
-	first = *lst;
-	second = (*lst)->next;
-	if (second->next)
-	{
-		first->next = second->next;
-		second->next->prev = first;
-	}
-	else
-		first->next = NULL;
+	if (!(*a) || !(*a)->next)
+		return ;
+	second = (*a)->next;
+	first = *a;
+	first->next = second->next;
 	second->next = first;
-	second->prev = NULL;
-	*lst = second;
+	*a = second;
 }
-void    ft_sa(t_list **list)
+
+void	ft_sa(t_list **a)
 {
-    ft_s(list);
-	ft_printf("sa\n");
+	ft_swap(a);
+    ft_printf("sa\n");
 }
-void ft_sb(t_list **list)
+
+void	ft_sb(t_list **b)
 {
-    ft_s(list);
-    ft_printf("ba\n");
+	ft_swap(b);
+	ft_printf("sb\n");
 }
 
 void ft_ss(t_list **stack_A, t_list **stack_B)
 {
-    ft_s(stack_A);
-    ft_s(stack_B);
+    ft_swap(stack_A);
+    ft_swap(stack_B);
 	ft_printf("ss\n");
 }

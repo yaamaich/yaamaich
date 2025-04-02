@@ -6,7 +6,7 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 20:02:40 by yaamaich          #+#    #+#             */
-/*   Updated: 2025/03/28 06:44:55 by yaamaich         ###   ########.fr       */
+/*   Updated: 2025/04/02 18:28:51 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,4 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	}
 	ptr = ft_lstlast(*lst);
 	ptr->next = new;
-	new->prev = ptr;
 }

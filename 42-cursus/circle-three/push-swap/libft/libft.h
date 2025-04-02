@@ -6,7 +6,7 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 00:52:26 by yaamaich          #+#    #+#             */
-/*   Updated: 2025/03/28 07:26:44 by yaamaich         ###   ########.fr       */
+/*   Updated: 2025/04/02 18:50:05 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ typedef struct s_list
 	int			content;
 	int			index;
 	struct	s_list	*next;
-	struct	s_list	*prev;
 }					t_list;
 
 void	ft_exit_error(void);
