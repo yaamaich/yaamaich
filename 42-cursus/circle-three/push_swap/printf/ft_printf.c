@@ -6,7 +6,7 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 01:16:27 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/26 22:50:31 by yaamaich         ###   ########.fr       */
+/*   Updated: 2025/04/03 23:19:48 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,8 @@ int	ft_printf(const char *format, ...)
 
 	va_start(ap, format);
 	count = 0;
-	if (write(1,0,0) == -1)
-	{
+	if (write(1, 0, 0) == -1)
 		return (-1);
-	}
 	while (*format)
 	{
 		if (*format == '%' && *format + 1)

@@ -6,10 +6,9 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 20:58:13 by yaamaich          #+#    #+#             */
-/*   Updated: 2025/04/02 22:02:54 by yaamaich         ###   ########.fr       */
+/*   Updated: 2025/04/03 23:15:19 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "push_swap.h"
 
@@ -81,4 +80,3 @@ void	sort_algo(int elements, t_list **a, t_list **b)
 			ft_rrb(b);
 	}
 }
-

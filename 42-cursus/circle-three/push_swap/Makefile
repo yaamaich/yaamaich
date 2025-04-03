@@ -5,7 +5,7 @@ SRCS = push_swap.c \
     	ft_rev_rotate.c \
     	ft_freelst.c \
     	ft_push.c \
-    	check.c \
+    	sortcheck.c \
     	ft_rotate.c \
     	ft_swap.c  \
 		init.c \

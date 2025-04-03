@@ -6,7 +6,7 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 22:13:39 by yaamaich          #+#    #+#             */
-/*   Updated: 2025/04/02 22:46:19 by yaamaich         ###   ########.fr       */
+/*   Updated: 2025/04/03 22:45:58 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_freelst(t_list *list)
 {
 	t_list	*tmp;
-	
+
 	while (list)
 	{
 		tmp = list->next;
@@ -23,6 +23,7 @@ void	ft_freelst(t_list *list)
 		list = tmp;
 	}
 }
+
 void	ft_freeswap(t_swap *list)
 {
 	ft_freelst(list->stack_a);
@@ -30,3 +31,17 @@ void	ft_freeswap(t_swap *list)
 	free(list);
 }
 
+void	ft_free_split(char **split)
+{
+	int	i;
+
+	if (!split)
+		return ;
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
+}

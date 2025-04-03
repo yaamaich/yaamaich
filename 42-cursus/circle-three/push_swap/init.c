@@ -6,42 +6,12 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 03:03:50 by yaamaich          #+#    #+#             */
-/*   Updated: 2025/04/02 22:52:51 by yaamaich         ###   ########.fr       */
+/*   Updated: 2025/04/03 23:08:23 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_free_split(char **split)
-{
-	int	i;
-
-	if (!split)
-		return ;
-	i = 0;
-	while (split[i])
-	{
-		free(split[i]);
-		i++;
-	}
-	free(split);
-}
-int ft_digit(char *str)
-{
-	int i = 0;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	if(!str[i])
-		return 0;
-
-	while (str[i])
-	{
-		if (ft_isdigit(str[i])== 0)
-			return 0;
-		i++;
-	}
-	return 1;
-}
 int	is_sorted(t_list *list)
 {
 	t_list	*temp;
@@ -55,6 +25,7 @@ int	is_sorted(t_list *list)
 	}
 	return (1);
 }
+
 int	ft_check_double(t_list *lst, int k)
 {
 	t_list	*tmp;
@@ -68,6 +39,53 @@ int	ft_check_double(t_list *lst, int k)
 	}
 	return (0);
 }
+
+int	valid_int(char *str)
+{
+	long	nb;
+	int		i;
+
+	i = 0;
+	nb = 0;
+	while (str[i])
+	{
+		if ((str[i] >= '0' && str[i] <= '9')
+			&& (str[i + 1] == '+' || str[i + 1] == '-'))
+			return (-1);
+		else if ((str[i] == '+' || str[i] == '-')
+			&& (str[i + 1] == '+' || str[i + 1] == '-' || str[i + 1] == '\0'))
+			return (-1);
+		if (ft_strncmp(str, "-2147483648", 11) == 0)
+			return (1);
+		if (str[i] == '+' || str[i] == '-')
+			i++;
+		else if (!(str[i] >= '0' && str[i] <= '9'))
+			return (-1);
+		nb = nb * 10 + str[i] - '0';
+		if (nb > INT_MAX)
+			return (-1);
+		i++;
+	}
+	return (1);
+}
+
+void	ft_checkerror(t_swap **swap, char **str, int k)
+{
+	int	i;
+
+	i = k;
+	if (valid_int(str[i]) == -1)
+	{
+		ft_free_split(str);
+		ft_exit_error();
+	}
+	if (ft_check_double((*swap)->stack_a, ft_atoi(str[i])) == 1)
+	{
+		ft_free_split(str);
+		ft_exit_error();
+	}
+}
+
 void	ft_usesplit(char *str, t_swap **sswap)
 {
 	int		k;
@@ -75,47 +93,16 @@ void	ft_usesplit(char *str, t_swap **sswap)
 
 	k = 0;
 	c = ft_split(str, ' ');
+	if (!c)
+		ft_exit_error();
 	while (c[k])
-	{	
-		if (ft_digit(c[k]) == 0)
-		{
-			ft_free_split(c);
-			ft_exit_error();
-		}
-		if (ft_check_double((*sswap)->stack_a, ft_atoi(c[k])) == 1)
-		{
-			ft_free_split(c);
-			ft_exit_error();
-		}
+	{
+		ft_checkerror(sswap, c, k);
 		if ((*sswap)->stack_a == NULL)
 			(*sswap)->stack_a = ft_lstnew((ft_atoi(c[k])));
 		else
 			ft_lstadd_back(&(*sswap)->stack_a, ft_lstnew(ft_atoi(c[k])));
-		(*sswap)->asize++;
 		k++;
 	}
 	ft_free_split(c);
-}
-void	initstack(int size, char **str)
-{
-	t_swap	*swap;
-	int		i;
-
-	swap = malloc(sizeof(t_swap));
-	if (!swap)
-		return ;
-	swap->stack_a = NULL;
-	swap->stack_b = NULL;
-	swap->asize = 0;
-	swap->bsize = 0;
-	i = 1;
-	while (i < size)
-	{
-
-		ft_usesplit(str[i], &swap);
-		i++;
-	}
-	assign_index(&swap->stack_a);
-	check_sorting(&swap);
-	ft_freeswap(swap);
 }

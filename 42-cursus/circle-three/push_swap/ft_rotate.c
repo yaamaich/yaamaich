@@ -12,10 +12,9 @@
 
 #include "push_swap.h"
 
-
-static void	ft_r(t_list **stack)
+void	ft_r(t_list **stack)
 {
-	t_list *head;
+	t_list	*head;
 
 	head = *stack;
 	if (!(*stack) || !((*stack)->next))
@@ -24,16 +23,19 @@ static void	ft_r(t_list **stack)
 	head->next = NULL;
 	ft_lstlast(*stack)->next = head;
 }
+
 void	ft_ra(t_list **lst)
 {
 	ft_r(lst);
 	ft_printf("ra\n");
 }
+
 void	ft_rb(t_list **lst)
 {
 	ft_r(lst);
 	ft_printf("rb\n");
 }
+
 void	ft_rr(t_list **stack_A, t_list **stack_B)
 {
 	if (!stack_A || !stack_B)

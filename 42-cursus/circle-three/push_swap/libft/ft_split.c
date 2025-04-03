@@ -6,7 +6,7 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 00:33:21 by yaamaich          #+#    #+#             */
-/*   Updated: 2025/03/21 03:23:24 by yaamaich         ###   ########.fr       */
+/*   Updated: 2025/04/03 23:17:45 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	count_word(char *p, char c)
 	count = 0;
 	i = 0;
 	while (p[i])
-	{ // yahya is the best  one f 1337 a drari wlah 
+	{
 		if ((p[i] != c && (p[i + 1] == '\0' || p[i + 1] == c)))
 			count++;
 		i++;
