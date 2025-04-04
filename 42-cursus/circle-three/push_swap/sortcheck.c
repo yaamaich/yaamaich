@@ -6,7 +6,7 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 00:12:16 by yaamaich          #+#    #+#             */
-/*   Updated: 2025/04/04 19:44:41 by yaamaich         ###   ########.fr       */
+/*   Updated: 2025/04/04 20:47:22 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,27 @@ void	sort_3(t_list **stack_a)
 	if ((*stack_a)->content > (*stack_a)->next->content)
 		ft_sa(stack_a);
 }
+void	sort_4(t_list **a, t_list **b)
+{
+	int	count;
+	int	size;
 
+	count = 0;
+	size = ft_lstsize(*a);
+	while (count < 1)
+	{
+		if ((*a)->index == 0)
+		{
+			ft_pb(b, a);
+			count++;
+		}
+		else
+			ft_ra(a);
+	}
+	if (size == 4)
+		sort_3(a);
+	ft_pa(a, b);
+}
 void	sort_5(t_list **a, t_list **b)
 {
 	int	count;
@@ -96,7 +116,9 @@ void	check_sorting(t_swap **llst)
 		ft_sa(&(*llst)->stack_a);
 	else if (size == 3)
 		sort_3(&(*llst)->stack_a);
-	else if (size <= 5)
+	else if (size == 4)
+		sort_4(&(*llst)->stack_a, &(*llst)->stack_b);
+	else if (size == 5)
 		sort_5(&(*llst)->stack_a, &(*llst)->stack_b);
 	else
 		sort_algo(size, &(*llst)->stack_a, &(*llst)->stack_b);
