@@ -6,13 +6,13 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 12:27:48 by yaamaich          #+#    #+#             */
-/*   Updated: 2024/11/12 19:25:15 by yaamaich         ###   ########.fr       */
+/*   Updated: 2025/04/04 00:07:30 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isascii(unsigned int a)
+int	ft_isascii(int a)
 {
 	if (a >= 0 && a <= 127)
 		return (1);

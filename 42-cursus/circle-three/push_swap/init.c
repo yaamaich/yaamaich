@@ -6,7 +6,7 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 03:03:50 by yaamaich          #+#    #+#             */
-/*   Updated: 2025/04/03 23:08:23 by yaamaich         ###   ########.fr       */
+/*   Updated: 2025/04/04 02:43:14 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,23 +86,29 @@ void	ft_checkerror(t_swap **swap, char **str, int k)
 	}
 }
 
-void	ft_usesplit(char *str, t_swap **sswap)
+void	ft_usesplit(int size, char **str, t_swap **sswap)
 {
 	int		k;
+	int		i;
 	char	**c;
 
-	k = 0;
-	c = ft_split(str, ' ');
-	if (!c)
-		ft_exit_error();
-	while (c[k])
+	i = 1;
+	while (i < size)
 	{
-		ft_checkerror(sswap, c, k);
-		if ((*sswap)->stack_a == NULL)
-			(*sswap)->stack_a = ft_lstnew((ft_atoi(c[k])));
-		else
-			ft_lstadd_back(&(*sswap)->stack_a, ft_lstnew(ft_atoi(c[k])));
-		k++;
+		c = ft_split(str[i], ' ');
+		if (!c)
+			ft_exit_error();
+		k = 0;
+		while (c[k])
+		{
+			ft_checkerror(sswap, c, k);
+			if ((*sswap)->stack_a == NULL)
+				(*sswap)->stack_a = ft_lstnew((ft_atoi(c[k])));
+			else
+				ft_lstadd_back(&(*sswap)->stack_a, ft_lstnew(ft_atoi(c[k])));
+			k++;
+		}
+		ft_free_split(c);
+		i++;
 	}
-	ft_free_split(c);
 }
