@@ -27,13 +27,13 @@ void	ft_r(t_list **stack)
 void	ft_ra(t_list **lst)
 {
 	ft_r(lst);
-	ft_printf("ra\n");
+	ft_putstr_fd("ra\n", 1);
 }
 
 void	ft_rb(t_list **lst)
 {
 	ft_r(lst);
-	ft_printf("rb\n");
+	ft_putstr_fd("rb\n", 1);
 }
 
 void	ft_rr(t_list **stack_A, t_list **stack_B)
@@ -44,5 +44,5 @@ void	ft_rr(t_list **stack_A, t_list **stack_B)
 		return ;
 	ft_r(stack_A);
 	ft_r(stack_B);
-	ft_printf("rr\n");
+	ft_putstr_fd("rr\n", 1);
 }

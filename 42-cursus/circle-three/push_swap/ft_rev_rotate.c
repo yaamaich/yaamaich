@@ -6,7 +6,7 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 00:10:02 by yaamaich          #+#    #+#             */
-/*   Updated: 2025/04/04 00:11:17 by yaamaich         ###   ########.fr       */
+/*   Updated: 2025/04/04 20:21:25 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 void	ft_rev(t_list **list)
 {
-	t_list *tmp = *list;
-	t_list *current;
+	t_list	*tmp;
+	t_list	*current;
 
+	tmp = *list;
 	if (!tmp || !tmp->next)
 		return ;
 	current = ft_lstlast(tmp);
@@ -27,21 +28,21 @@ void	ft_rev(t_list **list)
 	*list = current;
 }
 
-void ft_rra(t_list **lst)
+void	ft_rra(t_list **lst)
 {
 	ft_rev(lst);
-	ft_printf("rra\n");
+	ft_putstr_fd("rra\n", 1);
 }
 
-void ft_rrb(t_list **lst)
+void	ft_rrb(t_list **lst)
 {
 	ft_rev(lst);
-	ft_printf("rrb\n");
+	ft_putstr_fd("rrb\n", 1);
 }
 
-void ft_rrr(t_list **stack_A, t_list **stack_B)
+void	ft_rrr(t_list **stack_A, t_list **stack_B)
 {
 	ft_rev(stack_A);
 	ft_rev(stack_B);
-	ft_printf("rrr\n");
+	ft_putstr_fd("rrr\n", 1);
 }

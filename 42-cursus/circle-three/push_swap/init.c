@@ -6,7 +6,7 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 03:03:50 by yaamaich          #+#    #+#             */
-/*   Updated: 2025/04/04 02:43:14 by yaamaich         ###   ########.fr       */
+/*   Updated: 2025/04/04 19:14:38 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	ft_usesplit(int size, char **str, t_swap **sswap)
 	while (i < size)
 	{
 		c = ft_split(str[i], ' ');
-		if (!c)
+		if (!c[0])
 			ft_exit_error();
 		k = 0;
 		while (c[k])

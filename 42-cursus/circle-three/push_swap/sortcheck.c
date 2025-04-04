@@ -6,7 +6,7 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 00:12:16 by yaamaich          #+#    #+#             */
-/*   Updated: 2025/04/04 00:59:10 by yaamaich         ###   ########.fr       */
+/*   Updated: 2025/04/04 19:44:41 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	sort_3(t_list **stack_a)
 	if ((*stack_a)->content > (*stack_a)->next->content)
 		ft_sa(stack_a);
 }
+
 void	sort_5(t_list **a, t_list **b)
 {
 	int	count;
@@ -80,6 +81,7 @@ void	sort_5(t_list **a, t_list **b)
 	ft_pa(a, b);
 	ft_pa(a, b);
 }
+
 void	check_sorting(t_swap **llst)
 {
 	int	size;

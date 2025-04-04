@@ -6,22 +6,22 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 00:52:26 by yaamaich          #+#    #+#             */
-/*   Updated: 2025/04/04 00:06:48 by yaamaich         ###   ########.fr       */
+/*   Updated: 2025/04/04 19:45:03 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <limits.h>
+# include <stdint.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdint.h>
 
 typedef struct s_list
 {
-	int			content;
-	int			index;
-	struct	s_list	*next;
+	int				content;
+	int				index;
+	struct s_list	*next;
 }					t_list;
 
 void				ft_exit_error(void);
