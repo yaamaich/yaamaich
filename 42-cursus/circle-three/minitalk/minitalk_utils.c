@@ -6,18 +6,17 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 22:46:08 by yaamaich          #+#    #+#             */
-/*   Updated: 2025/02/10 22:46:09 by yaamaich         ###   ########.fr       */
+/*   Updated: 2025/04/05 18:38:41 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minitalk.h"
 
 int	ft_atoi(const char *str)
 {
-	int		i;
-	int		s;
-	long	rs;
+	int			i;
+	int			s;
+	long long	rs;
 
 	i = 0;
 	s = 1;
@@ -34,6 +33,8 @@ int	ft_atoi(const char *str)
 	{
 		rs = rs * 10 + (str[i] - 48);
 		i++;
+		if (rs > INT_MAX)
+			return (-1);
 	}
 	return (rs * s);
 }

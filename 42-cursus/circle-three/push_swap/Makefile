@@ -1,7 +1,6 @@
 NAME = push_swap
 
-# Variables
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
 SRCS = push_swap.c \
     	ft_rev_rotate.c \
@@ -17,7 +16,6 @@ SRCS = push_swap.c \
 OBJS = $(SRCS:.c=.o)
 LIBFT = libft/libft.a
 
-# Rules
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) push_swap.h
@@ -26,11 +24,9 @@ $(NAME): $(OBJS) $(LIBFT) push_swap.h
 $(LIBFT):
 	make -C libft
 
-# Dependencies
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Clean rules
 clean:
 	rm -f $(OBJS)
 	make -C libft clean
@@ -41,5 +37,4 @@ fclean: clean
 
 re: fclean all
 
-# Phony
 .PHONY: all clean fclean re

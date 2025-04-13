@@ -6,15 +6,13 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 23:12:23 by yaamaich          #+#    #+#             */
-/*   Updated: 2025/04/04 20:25:56 by yaamaich         ###   ########.fr       */
+/*   Updated: 2025/04/04 21:11:11 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include "libft/libft.h"
-# include <limits.h>
-# include <stdio.h>
 # include <stdlib.h>
 
 typedef struct s_swap
@@ -36,8 +34,8 @@ void		ft_rrr(t_list **stack_A, t_list **stack_B);
 void		ft_ss(t_list **stack_A, t_list **satck_B);
 void		ft_pa(t_list **stack1, t_list **stack2);
 void		ft_pb(t_list **stack1, t_list **stack2);
-void		ft_lstadd_front(t_list **lst, t_list *new);
 void		ft_freelst(t_list *list);
+void		sort_4(t_list **a, t_list **b);
 void		sort_5(t_list **stack_a, t_list **stack_b);
 void		sort_3(t_list **stack_a);
 void		sort_algo(int elements, t_list **a, t_list **b);

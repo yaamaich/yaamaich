@@ -9,7 +9,6 @@ SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
 	   ft_split.c ft_itoa.c ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c ft_lstlast_bonus.c ft_lstadd_back_bonus.c \
 
 OBJS = $(SRCS:.c=.o)
-OBJ = $(SRB:.c=.o)
 NAME = libft.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
@@ -19,17 +18,13 @@ all: ${NAME}
 ${NAME}: ${OBJS}
 	ar rcs ${NAME} $?
 
-bonus: .bonus
 
-.bonus: ${OBJ}
-	ar rcs ${NAME} $?
-	@touch .bonus
 
 %.o: %.c libft.h
 	${CC} ${CFLAGS} -c $< -o $@
 
 clean:
-	rm -f ${OBJS}  ${OBJ} .bonus
+	rm -f ${OBJS}
 
 fclean: clean
 	rm -f ${NAME}
@@ -37,4 +32,4 @@ fclean: clean
 re: fclean all
 
 
-.PHONY : clean bonus all fclean re
+.PHONY : clean all fclean re

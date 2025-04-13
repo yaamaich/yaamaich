@@ -1,67 +1,68 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   client.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/10 23:19:38 by yaamaich          #+#    #+#             */
+/*   Updated: 2025/04/05 19:41:15 by yaamaich         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minitalk.h"
 
-static int	ft_atoi(const char *str)
-{
-	int					i;
-	int					sign;
-	unsigned long int	result;
-
-	i = 0;
-	sign = 1;
-	result = 0;
-	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
-		i++;
-	if (str[i] == '-')
-	{
-		sign = -1;
-		i++;
-	}
-	else if (str[i] == '+')
-		i++;
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		result *= 10;
-		result += str[i] - '0';
-		i++;
-	}
-	return (result * sign);
-}
-
-void	ft_atob(int pid, char c)
-{
-	int	bit;
-
-	bit = 0;
-	while (bit < 8)
-	{
-		if ((c & (0x01 << bit)))
-			kill(pid, SIGUSR1);
-		else
-			kill(pid, SIGUSR2);
-		usleep(500);
-		bit++;
-	}
-}
-
-int	main(int argc, char **argv)
+int	check_pid(char *str)
 {
 	int	pid;
 	int	i;
 
-	i = 0;
-	if (argc == 3)
+	pid = ft_atoi(str);
+	if (pid < 0)
+		return (0);
+	i = kill(pid, 0);
+	if (i == -1)
+		return (0);
+	return (1);
+}
+
+void	send_bits(int pid, char c)
+{
+	int	i;
+
+	i = 7;
+	while (i >= 0)
 	{
-		pid = ft_atoi(argv[1]);
-		while (argv[2][i] != '\0')
+		if ((c >> i) & 1)
+			kill(pid, SIGUSR2);
+		else
+			kill(pid, SIGUSR1);
+		i--;
+		usleep(100);
+	}
+}
+
+int	main(int ac, char **av)
+{
+	int	i;
+	int	pid;
+
+	i = 0;
+	if (ac == 3)
+	{
+		if (check_pid(av[1]))
 		{
-			ft_atob(pid, argv[2][i]);
-			i++;
+			pid = ft_atoi(av[1]);
+			while (av[2][i] != '\0')
+			{
+				send_bits(pid, av[2][i]);
+				i++;
+			}
 		}
+		else
+			ft_putstr("The provided PID is invalid. try again!\n");
 	}
 	else
-	{
-		ft_printf("Error\n");
-		return (1);
-	}
+		ft_putstr("Syntax error! \n");
 	return (0);
 }
