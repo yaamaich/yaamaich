@@ -1,0 +1,7 @@
+/Users/yaamaich/Desktop/yaamaich/42-cursus/so_long-master/MLX42/build/CMakeFiles/mlx42.dir
+/Users/yaamaich/Desktop/yaamaich/42-cursus/so_long-master/MLX42/build/CMakeFiles/edit_cache.dir
+/Users/yaamaich/Desktop/yaamaich/42-cursus/so_long-master/MLX42/build/CMakeFiles/rebuild_cache.dir
+/Users/yaamaich/Desktop/yaamaich/42-cursus/so_long-master/MLX42/build/CMakeFiles/list_install_components.dir
+/Users/yaamaich/Desktop/yaamaich/42-cursus/so_long-master/MLX42/build/CMakeFiles/install.dir
+/Users/yaamaich/Desktop/yaamaich/42-cursus/so_long-master/MLX42/build/CMakeFiles/install/local.dir
+/Users/yaamaich/Desktop/yaamaich/42-cursus/so_long-master/MLX42/build/CMakeFiles/install/strip.dir

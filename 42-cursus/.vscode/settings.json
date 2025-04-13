@@ -1,0 +1,10 @@
+{
+	"C_Cpp.errorSquiggles": "disabled",
+	"files.associations": {
+		"libft.h": "c",
+		"mlx42.h": "c",
+		"so_long.h": "c",
+		"locale": "c",
+		"string": "c"
+	}
+}
