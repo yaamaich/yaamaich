@@ -6,7 +6,7 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 07:55:42 by yaamaich          #+#    #+#             */
-/*   Updated: 2025/04/10 07:55:43 by yaamaich         ###   ########.fr       */
+/*   Updated: 2025/04/14 20:58:27 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	has_valid_path(char **map)
 	free_map(state.map, state.rows);
 	return (state.collectibles == 0 && state.exit_found);
 }
+
 int	count_lines(const char *filename)
 {
 	int		fd;

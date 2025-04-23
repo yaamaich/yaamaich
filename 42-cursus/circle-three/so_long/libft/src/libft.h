@@ -6,21 +6,21 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 00:52:26 by yaamaich          #+#    #+#             */
-/*   Updated: 2025/04/09 04:59:50 by yaamaich         ###   ########.fr       */
+/*   Updated: 2025/04/14 20:53:53 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include <fcntl.h>
 # include <limits.h>
+# include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <fcntl.h>
-# include <stdarg.h>
 
 # ifndef BUFFER_SIZE
-# define BUFFER_SIZE 10
+#  define BUFFER_SIZE 10
 # endif
 
 typedef struct s_list

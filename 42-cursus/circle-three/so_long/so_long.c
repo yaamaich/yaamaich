@@ -6,7 +6,7 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 04:22:08 by yaamaich          #+#    #+#             */
-/*   Updated: 2025/04/13 03:14:07 by yaamaich         ###   ########.fr       */
+/*   Updated: 2025/04/14 20:58:09 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	print_move_count(params, 0);
 }
 
-int	main(int argc, char **argv)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+int	main(int argc, char **argv)
 {
 	char		**map;
 	mlx_t		*mlx;

@@ -6,7 +6,7 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 07:55:48 by yaamaich          #+#    #+#             */
-/*   Updated: 2025/04/11 23:16:59 by yaamaich         ###   ########.fr       */
+/*   Updated: 2025/04/15 18:15:04 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,7 @@ void	handle_special_cases(t_params *params, int new_x,
 {
 	if (params->map[new_y][new_x] == 'E' && collectible_count > 0)
 		return ;
-	else if ((params->map[new_y][new_x] == 'E' && collectible_count == 0)
-		|| params->map[new_y][new_x] == 'O')
+	else if (params->map[new_y][new_x] == 'E' && collectible_count == 0)
 		return (mlx_close_window(params->mlx));
 }
 

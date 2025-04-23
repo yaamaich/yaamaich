@@ -6,7 +6,7 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 20:58:13 by yaamaich          #+#    #+#             */
-/*   Updated: 2025/04/03 23:15:19 by yaamaich         ###   ########.fr       */
+/*   Updated: 2025/04/14 22:18:56 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	sort_algo(int elements, t_list **a, t_list **b)
 	while ((*b))
 	{
 		max_pos = find_max(*b, elements);
-		size = elements / 2;
+		 ize = elements / 2;
 		if ((*b)->index == elements - 1)
 		{
 			ft_pa(a, b);
