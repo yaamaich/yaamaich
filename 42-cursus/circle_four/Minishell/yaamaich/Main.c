@@ -6,7 +6,7 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 17:23:49 by yaamaich          #+#    #+#             */
-/*   Updated: 2025/04/25 18:01:31 by yaamaich         ###   ########.fr       */
+/*   Updated: 2025/04/30 23:12:13 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,31 +65,37 @@ t_token     *handle_quotes(t_lexer *lexer, char quote_char)
 
     token = malloc(sizeof(t_token));
     token->value = content;
-    token->type = WORD_TOKEN;
     token->quete_type = quote_char;
+    token->type = WORD_TOKEN;
 
     return (token);
 }
 
-t_token_type    classify_token(char *token_str)
+void handle_operator(t_parser *parser, t_token *op_token)
 {
-    if (ft_strcmp(token_str , "|") == 0)
-        return (OP_TOKEN);
-    else if ((ft_strcmp(token_str, "<")))
-        return  OP_TOKEN, REDIR_IN);
-    else if ((ft_strcmp(token_str, ">")))
-        return (OP_TOKEN, REDIR_OUT);
-    else if ((ft_strcmp(token_str, ">>")))
-        return (OP_TOKEN, APPEND);
-    else if ((ft_strcmp(token_str, "<<")))
-        return (OP_TOKEN, HEREDOC);
-    else if ((ft_strcmp(token_str, "(")))
+	
+}
+
+t_token_type    classify_token(t_token *token)
+{
+    if (ft_strcmp(token->value, "|") == 0)
+        return (token->type = OP_TOKEN, token);
+    else if ((ft_strcmp(token->value, "<") == 0))
+        return  (token->type = OP_TOKEN, token->op_type = REDIR_IN);
+    else if ((ft_strcmp(token->value, ">") == 0))
+        return  (token->type = OP_TOKEN, token->op_type = REDIR_OUT);
+    else if ((ft_strcmp(token->value, ">>") == 0))
+        return  (token->type = OP_TOKEN, token->op_type = APPEND);
+    else if ((ft_strcmp(token->value, "<<") == 0))
+        return  (token->type = OP_TOKEN, token->op_type = HEREDOC);
+    else if ((ft_strcmp(token->value, "(") == 0))
         return (L_PAREN_TOKEN);
-    else if ((ft_strcmp(token_str, ")")))
+    else if ((ft_strcmp(token->value, ")") == 0))
         return (R_PAREN_TOKEN);
-    else if ((ft_strcmp(token_str, "")))
-        
-    
+    else if (is_the first_token_in_command(token))
+        return (token->type = CMD_TOKEN, token)
+    else
+		return	(token->type = WORD_TOKEN, token);
 }
 
 int main()

@@ -6,7 +6,7 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 13:00:24 by yaamaich          #+#    #+#             */
-/*   Updated: 2025/04/24 16:53:26 by yaamaich         ###   ########.fr       */
+/*   Updated: 2025/05/01 23:16:00 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,10 @@ typedef enum {
 typedef struct s_token
 {
 	t_token_type	type;
+	t_token_type	op_type;
 	char			*value;
 	char			quete_type;
 	
 }				t_token;
+
 #endif
