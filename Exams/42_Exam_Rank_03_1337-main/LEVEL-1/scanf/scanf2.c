@@ -131,3 +131,15 @@ int ft_scanf(const char *format, ...) {
 	va_end(ap);
 	return ret;
 }
+int main()
+{
+    char ptr;
+    char *p = malloc(2); // واحد للحرف + واحد للـ '\0'
+
+    ft_scanf("name:%c", &ptr);
+    *p = ptr;
+    p[1] = '\0';  // نحط النهاية
+
+    printf("result %s\n", p);
+    free(p);
+}
