@@ -25,18 +25,15 @@ int is_safe(int *board, int col, int row)
 	while(i < col)
 	{
 		if(board[i] == row || board[i] - row == col - i || row - board[i] == col - i)
-		{
 			return 0;
-		}
 		i++;
 	}
 	return 1;
 }
 
-
 void solve_nq(int *board, int col, int n)
 {
-	if( col == n)
+	if(col == n)
 	{
 		printf("ana hna");
 		print_solution(board,n);

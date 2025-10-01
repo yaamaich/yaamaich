@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-#define PHILO_H
+# ifndef PHILO_H
+# define PHILO_H
 
 # include <stdio.h>
 # include <unistd.h>
@@ -28,7 +28,7 @@ typedef struct      s_philo
     pthread_t       thread;
     pthread_mutex_t *right_fork;
     pthread_mutex_t *left_fork;
-    struct S_table *table;
+    struct s_table *table;
 }                   t_philo;
 
 typedef struct s_table
@@ -47,12 +47,12 @@ typedef struct s_table
     pthread_mutex_t print;
 }               t_table;
 
+long long   get_time(void);
 int     ft_atol(const char *str);
 int     check_int(const char *str);
 int     check_len(const char *str);
 void    init_table(t_table *table);
 void    init_philo(t_table *table);
 void    simolation(t_table *table);
-
-
+void    print_status(t_philo *philo, char *status);
 #endif

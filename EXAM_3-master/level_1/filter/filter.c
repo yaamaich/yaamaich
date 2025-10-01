@@ -1,42 +1,48 @@
 #include <string.h>
-#include <stdlib.h>
 #include <unistd.h>
+#include <stdarg.h>
+#include <stdlib.h>
 
-int ft_strncmp(char *s1, char *s2, int len)
+
+int ft_strcmp(char *s1, char *s2, int len)
 {
     int i = 0;
-    while (s1[i] == s2[i] && i < len)
+    while (s1[i] == s2[i] && (s1[i] || s2[i]))
         i++;
     if (i == len)
         return 1;
     return 0;
 }
-int main(int argc, char **argv)
+int main (int argc, char **argv)
 {
     char c;
-
-    char *buf = malloc(10000000);
+    char *buff = malloc(1000000);
     int i = 0;
-    int byte = read(0, &c, 1);
-    while (byte > 0)
+    int b;
+    b = read(0, &c, 1);
+    while (b > 0)
     {
-        buf[i++] = c;
-        byte = read(0, &c, 1);
+        buff[i++] = c;
+        b = read(0, &c, 1);
     }
-    int len = strlen(argv[1]);
     int j = 0;
-    while (buf[j] != '\0')
+    int len = strlen(argv[1]);
+    while (buff[j])
     {
-        if (ft_strncmp(argv[1], &buf[j], len))
+        if (ft_strcmp(argv[1], &buff[j], len))
         {
-            for (int s = 0; s < len; s++)
-                write(1, "*", 1);
+            int s = 0;
+            while (s < len)
+            {
+                write (1, "*", 1);
+                s++;
+            }
             j += len;
-        }
-        else
+        }else
         {
-            write(1, &buf[j], 1);
+            write(1, &buff[j], 1);
             j++;
         }
     }
+    return 0;
 }

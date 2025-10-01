@@ -12,6 +12,39 @@
 
 #include "philo.h"
 
+void	precise_sleep(long long ms)
+{
+	long long	start;
+	start = get_time();
+	while (get_time() - start < ms)
+		usleep(100);
+}
+
+void	lifes(void *args)
+{
+	t_philo *philo;
+
+	philo = (t_philo *) arg;
+	print_status(philo, "is thinking");
+	pthread_mutex_lock(philo->right_fork);
+	print_status(philo, "his taken right fork");
+	pthread_mutex_lock(philo->left_fork);
+	print_status(philo, "his taken left fork");
+	print_status(philo)
+}
+void	one_life(void *arg)
+{
+	t_philo *philo;
+	philo = (t_philo *)arg;
+	print_status(philo, "is	thinking");
+	pthread_mutex_lock(philo->right_fork);
+	print_status(philo, "has taken right fork");
+	precise_sleep(philo->table->time_to_die, + 1);
+	print_status(philo, "died");
+	pthread_mutex_unlock(philo->right_fork);
+	
+	return (NULL);
+}
 void	simolation(t_table *table)
 {
 	int i;
