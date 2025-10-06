@@ -56,7 +56,7 @@ int	check_int(const char *str)
 	}
 	return (0);
 }
-void	init_table(int argc, const char *str, t_table *table)
+void	init_table(int argc, char **argv, t_table *table)
 {
 	int i = 0;
 
@@ -65,15 +65,14 @@ void	init_table(int argc, const char *str, t_table *table)
 	table->time_to_die = ft_atol(argv[2]);
 	table->time_to_eat = ft_atol(argv[3]);
 	table->time_to_sleep = ft_atol(argv[4]);
-	table->max_meals = -1;
+	table->max_meal = -1;
 	if (argc == 6)
-		table->max_meals = ft_atol(argv[5]);
-	table->end_of_simulation = 0;
+		table->max_meal = ft_atol(argv[5]);
+	table->end = 0;
 	table->philos = malloc(sizeof(t_philo) * table->nbr_of_philo);
 	table->forks = malloc(sizeof(pthread_mutex_t) * table->nbr_of_philo);
 	while (i < table->nbr_of_philo)
 		pthread_mutex_init(&table->forks[i++], NULL);
-	pthread_mutex_init(&table->print, NULL);
 	pthread_mutex_init(&table->protect, NULL);
 	}
 	void 	init_philo(t_table *table)
@@ -88,7 +87,7 @@ void	init_table(int argc, const char *str, t_table *table)
 			table->philos[i].right_fork = &table->forks[i];
 			table->philos[i].left_fork = &table->forks[(i + 1)
 				% table->nbr_of_philo];
-			table->philos[i].table = &table;
+			table->philos[i].table = table;
 			table->philos[i].last_time_eat = get_time();
 			i++;
 		}
