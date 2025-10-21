@@ -41,6 +41,7 @@ void	check_philo_fullness(t_philo *p)
 		p->data->full_philos++;
 	pthread_mutex_unlock(&p->data->write_lock);
 }
+
 static int	validate_arguments(int cnt, char **args)
 {
 	int		i;
@@ -56,8 +57,7 @@ static int	validate_arguments(int cnt, char **args)
 		is_valid = validate_numeric(args[i]);
 		if (!args[i][0] || is_valid || digit_cnt > 10)
 		{
-			write(2, "Error: Invalid arguments\n", 25);
-			write(2, "Please provide positive numbers only\n", 37);
+			write(2, "Error: Invalid arguments Please positive numbers\n", 54);
 			return (0);
 		}
 		if (val < INT_MIN || val > INT_MAX || val == 0)

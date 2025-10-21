@@ -63,6 +63,7 @@ int	validate_numeric(const char *s)
 	}
 	return (0);
 }
+
 void	setup_table(int ac, char **av, t_table *t)
 {
 	int		i;

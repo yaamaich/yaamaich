@@ -54,6 +54,7 @@ void	*philosopher_routine(void *arg)
 	}
 	return (NULL);
 }
+
 void	*single_philo_routine(void *arg)
 {
 	t_philo		*p;
@@ -69,6 +70,7 @@ void	*single_philo_routine(void *arg)
 	pthread_mutex_unlock(p->fork_right);
 	return (NULL);
 }
+
 void	*monitor_death(void *arg)
 {
 	t_table		*t;
