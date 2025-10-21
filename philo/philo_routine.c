@@ -12,29 +12,13 @@
 
 #include "philo.h"
 
-void	ft_usleep(long long t, t_philo *p)
-{
-	long long	start;
-	long long	elapsed;
-
-	start = current_time();
-	elapsed = 0;
-	while (elapsed < t)
-	{
-		if (is_simulation_over(p))
-			return ;
-		usleep(100);
-		elapsed = current_time() - start;
-	}
-}
-
 void	*philosopher_routine(void *arg)
 {
 	t_philo	*p;
 
 	p = (t_philo *)arg;
 	if (p->philo_id % 2 == 0)
-		philo_sleep_routine(p);
+		usleep(100);
 	while (!is_simulation_over(p))
 	{
 		log_action(p, "is thinking");
@@ -50,26 +34,12 @@ void	*philosopher_routine(void *arg)
 		check_philo_fullness(p);
 		if (is_simulation_over(p))
 			return (NULL);
-		ft_usleep(p->data->sleeping_time, p);
+		philo_sleep_routine(p);
 	}
 	return (NULL);
 }
 
-void	*single_philo_routine(void *arg)
-{
-	t_philo		*p;
-
-	p = (t_philo *)arg;
-	log_action(p, "is thinking");
-	pthread_mutex_lock(p->fork_right);
-	log_action(p, "has taken a fork");
-	ft_usleep(p->data->death_time + 1, p);
-	log_action(p, "died");
-	pthread_mutex_unlock(p->fork_right);
-	return (NULL);
-}
-
-static int	check_death_condition(t_table *t, int i)
+int	check_death_condition(t_table *t, int i)
 {
 	long long	time_diff;
 	int			meal_cnt;
@@ -79,35 +49,6 @@ static int	check_death_condition(t_table *t, int i)
 	if (meal_cnt != t->meals_required && time_diff > t->death_time)
 		return (1);
 	return (0);
-}
-
-void	*monitor_death(void *arg)
-{
-	t_table		*t;
-	int			i;
-
-	t = (t_table *)arg;
-	while (1)
-	{
-		i = 0;
-		usleep(500);
-		pthread_mutex_lock(&t->write_lock);
-		while (i < t->philo_count)
-		{
-			if (t->meals_required != -1
-				&& t->full_philos >= t->philo_count)
-			{
-				t->simulation_stop = 1;
-				pthread_mutex_unlock(&t->write_lock);
-				return (NULL);
-			}
-			if (check_death_condition(t, i))
-				return (announce_death(i, t), NULL);
-			i++;
-		}
-		pthread_mutex_unlock(&t->write_lock);
-	}
-	return (NULL);
 }
 
 static void	create_threads(t_table *t)

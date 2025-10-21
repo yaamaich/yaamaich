@@ -1,4 +1,4 @@
-SRC = setup_config.c philo_main.c philo_routine.c utils_helper.c
+SRC = setup_config.c philo_main.c philo_routine.c utils_helper.c check_death.c   
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 NAME = philo
