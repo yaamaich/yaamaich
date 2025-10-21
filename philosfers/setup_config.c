@@ -19,7 +19,9 @@ long	ftatol(const char *s)
 
 	i = 0;
 	res = 0;
-	while (s[i])
+	while (s[i] == ' ' || s[i] == '\t')
+		i++;
+	while (s[i] >= '0' && s[i] <= '9')
 	{
 		res = res * 10 + (s[i] - '0');
 		i++;
@@ -34,6 +36,8 @@ int	get_digit_count(const char *s)
 
 	i = 0;
 	len = 0;
+	while (s[i] == ' ' || s[i] == '\t')
+		i++;
 	while (s[i] == '0')
 		i++;
 	while (s[i] >= '0' && s[i] <= '9')
@@ -49,6 +53,10 @@ int	validate_numeric(const char *s)
 	int	i;
 
 	i = 0;
+	while (s[i] == ' ' || s[i] == '\t')
+		i++;
+	if (!s[i])
+		return (1);
 	while (s[i])
 	{
 		if (s[i] < '0' || s[i] > '9')
