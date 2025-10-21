@@ -18,8 +18,8 @@ void	*philosopher_routine(void *arg)
 
 	p = (t_philo *)arg;
 	if (p->philo_id % 2 == 0)
-		usleep(100);
-	while (!is_simulation_over(p))
+		philo_sleep_routine(p);
+	while (1)
 	{
 		log_action(p, "is thinking");
 		pthread_mutex_lock(p->fork_right);
@@ -34,7 +34,7 @@ void	*philosopher_routine(void *arg)
 		check_philo_fullness(p);
 		if (is_simulation_over(p))
 			return (NULL);
-		philo_sleep_routine(p);
+		ft_usleep(p->data->sleeping_time, p);
 	}
 	return (NULL);
 }

@@ -54,6 +54,7 @@ void		*single_philo_routine(void *arg);
 void		cleanup_resources(t_table *t);
 void		*monitor_death(void *arg);
 long		ftatol(const char *s);
+int			check_death_condition(t_table *t, int i);
 void		philo_sleep_routine(t_philo *p);
 int			is_simulation_over(t_philo *p);
 void		update_meal_status(t_philo *p);
@@ -65,6 +66,5 @@ void		start_simulation(t_table *t);
 void		ft_usleep(long long t, t_philo *p);
 void		announce_death(int i, t_table *t);
 void		log_action(t_philo *p, char *msg);
-int			check_death_condition(t_table *t, int i);
 void		setup_table(int ac, char **av, t_table *t);
 #endif

@@ -1,4 +1,4 @@
-SRC = setup_config.c philo_main.c philo_routine.c utils_helper.c check_death.c   
+SRC = setup_config.c philo_main.c philo_routine.c utils_helper.c check_death.c
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 NAME = philo
@@ -9,7 +9,7 @@ all : $(NAME)
 $(NAME) : $(OBG)
 	$(CC) $(CFLAGS) $(OBG) -o $(NAME)
 
-%.o:%.c philo
+%.o:%.c philo.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean :

@@ -6,7 +6,7 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 13:12:35 by yaamaich          #+#    #+#             */
-/*   Updated: 2025/10/21 17:02:06 by yaamaich         ###   ########.fr       */
+/*   Updated: 2025/10/21 19:44:14 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ void	*monitor_death(void *arg)
 	{
 		i = 0;
 		pthread_mutex_lock(&t->write_lock);
-		if (t->meals_required != -1 && t->full_philos >= t->philo_count)
-		{
-			t->simulation_stop = 1;
-			pthread_mutex_unlock(&t->write_lock);
-			return (NULL);
-		}
 		while (i < t->philo_count)
 		{
+			if (t->full_philos == t->meals_required)
+			{
+				t->simulation_stop = 1;
+				pthread_mutex_unlock(&t->write_lock);
+				return (NULL);
+			}
 			if (check_death_condition(t, i))
 				return (announce_death(i, t), NULL);
 			i++;
@@ -60,6 +60,7 @@ void	*single_philo_routine(void *arg)
 	t_philo		*p;
 
 	p = (t_philo *)arg;
+	log_action(p, "is thinking");
 	pthread_mutex_lock(p->fork_right);
 	log_action(p, "has taken a fork");
 	ft_usleep(p->data->death_time + 1, p);
