@@ -21,6 +21,11 @@ void	*philosopher_routine(void *arg)
 		philo_sleep_routine(p);
 	while (1)
 	{
+		if (p->data->meals_required != -1
+			&& p->meals_count >= p->data->meals_required)
+			return (NULL);
+		if (is_simulation_over(p))
+			return (NULL);
 		log_action(p, "is thinking");
 		pthread_mutex_lock(p->fork_right);
 		log_action(p, "has taken a fork");
