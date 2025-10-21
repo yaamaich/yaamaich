@@ -12,74 +12,29 @@
 
 #include "philo.h"
 
-static void	lock_table_mutex(t_philo *p)
-{
-	pthread_mutex_lock(&p->data->write_lock);
-}
-
-static void	unlock_table_mutex(t_philo *p)
-{
-	pthread_mutex_unlock(&p->data->write_lock);
-}
-
-static void	record_meal_time(t_philo *p)
-{
-	long long	now;
-
-	now = current_time();
-	p->last_meal_time = now;
-}
-
-static void	increment_meal_counter(t_philo *p)
-{
-	int	current;
-	int	next;
-
-	current = p->meals_count;
-	next = current + 1;
-	p->meals_count = next;
-}
-
 void	update_meal_status(t_philo *p)
 {
-	lock_table_mutex(p);
-	record_meal_time(p);
-	increment_meal_counter(p);
-	unlock_table_mutex(p);
+	pthread_mutex_lock(&p->data->write_lock);
+	p->last_meal_time = current_time();
+	p->meals_count = p->meals_count + 1;
+	pthread_mutex_unlock(&p->data->write_lock);
 }
 
 void	philo_sleep_routine(t_philo *p)
 {
-	char		*msg;
-	long long	duration;
-
-	msg = "is sleeping";
-	log_action(p, msg);
-	duration = p->data->sleeping_time;
-	ft_usleep(duration, p);
-}
-
-static int	reached_meal_limit(int current, int required)
-{
-	int	is_limited;
-	int	matches;
-
-	is_limited = (required != -1);
-	matches = (current == required);
-	return (is_limited && matches);
+	log_action(p, "is sleeping");
+	ft_usleep(p->data->sleeping_time, p);
 }
 
 void	check_philo_fullness(t_philo *p)
 {
-	int	required_meals;
-	int	current_meals;
-	int	is_full;
+	int	req;
+	int	curr;
 
 	pthread_mutex_lock(&p->data->write_lock);
-	required_meals = p->data->meals_required;
-	current_meals = p->meals_count;
-	is_full = reached_meal_limit(current_meals, required_meals);
-	if (is_full)
+	req = p->data->meals_required;
+	curr = p->meals_count;
+	if (curr != -1 && curr == req)
 		p->data->full_philos++;
 	pthread_mutex_unlock(&p->data->write_lock);
 }

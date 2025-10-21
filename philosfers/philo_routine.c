@@ -12,93 +12,43 @@
 
 #include "philo.h"
 
-static long long	get_start_timestamp(void)
-{
-	long long	timestamp;
-
-	timestamp = current_time();
-	return (timestamp);
-}
-
-static long long	calculate_time_diff(long long start)
-{
-	long long	now;
-	long long	elapsed;
-
-	now = current_time();
-	elapsed = now - start;
-	return (elapsed);
-}
-
 void	ft_usleep(long long t, t_philo *p)
 {
-	long long	begin_time;
-	long long	time_elapsed;
-	int			should_stop;
+	long long	start;
+	long long	elapsed;
 
-	begin_time = get_start_timestamp();
-	time_elapsed = 0;
-	while (time_elapsed < t)
+	start = current_time();
+	elapsed = 0;
+	while (elapsed < t)
 	{
-		should_stop = is_simulation_over(p);
-		if (should_stop)
+		if (is_simulation_over(p))
 			return ;
 		usleep(100);
-		time_elapsed = calculate_time_diff(begin_time);
+		elapsed = current_time() - start;
 	}
-}
-
-static int	check_parity(int id)
-{
-	int	remainder;
-	int	is_even_numbered;
-
-	remainder = id % 2;
-	is_even_numbered = (remainder == 0);
-	return (is_even_numbered);
-}
-
-static void	acquire_forks(t_philo *p)
-{
-	pthread_mutex_lock(p->fork_right);
-	log_action(p, "has taken a fork");
-	pthread_mutex_lock(p->fork_left);
-	log_action(p, "has taken a fork");
-}
-
-static void	release_forks(t_philo *p)
-{
-	pthread_mutex_unlock(p->fork_right);
-	pthread_mutex_unlock(p->fork_left);
-}
-
-static void	perform_eating(t_philo *p)
-{
-	long long	eat_duration;
-
-	log_action(p, "is eating");
-	update_meal_status(p);
-	eat_duration = p->data->eating_time;
-	ft_usleep(eat_duration, p);
 }
 
 void	*philosopher_routine(void *arg)
 {
 	t_philo	*p;
-	int		even_philo;
 
 	p = (t_philo *)arg;
-	even_philo = check_parity(p->philo_id);
-	if (even_philo)
+	if (p->philo_id % 2 == 0)
 		philo_sleep_routine(p);
 	while (!is_simulation_over(p))
 	{
 		log_action(p, "is thinking");
 		if (is_simulation_over(p))
 			return (NULL);
-		acquire_forks(p);
-		perform_eating(p);
-		release_forks(p);
+		pthread_mutex_lock(p->fork_right);
+		log_action(p, "has taken a fork");
+		pthread_mutex_lock(p->fork_left);
+		log_action(p, "has taken a fork");
+		log_action(p, "is eating");
+		update_meal_status(p);
+		ft_usleep(p->data->eating_time, p);
+		pthread_mutex_unlock(p->fork_right);
+		pthread_mutex_unlock(p->fork_left);
 		check_philo_fullness(p);
 		if (is_simulation_over(p))
 			return (NULL);
@@ -107,27 +57,15 @@ void	*philosopher_routine(void *arg)
 	return (NULL);
 }
 
-static long long	compute_death_delay(t_philo *p)
-{
-	long long	death_limit;
-	long long	extra_time;
-
-	death_limit = p->data->death_time;
-	extra_time = death_limit + 1;
-	return (extra_time);
-}
-
 void	*single_philo_routine(void *arg)
 {
 	t_philo		*p;
-	long long	wait_time;
 
 	p = (t_philo *)arg;
 	log_action(p, "is thinking");
 	pthread_mutex_lock(p->fork_right);
 	log_action(p, "has taken a fork");
-	wait_time = compute_death_delay(p);
-	ft_usleep(wait_time, p);
+	ft_usleep(p->data->death_time + 1, p);
 	log_action(p, "died");
 	pthread_mutex_unlock(p->fork_right);
 	return (NULL);
