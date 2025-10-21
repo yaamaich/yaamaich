@@ -1,4 +1,4 @@
-SRC = init.c main.c simulation.c philotools.c
+SRC = setup_config.c philo_main.c philo_routine.c utils_helper.c
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 NAME = philo
@@ -15,7 +15,7 @@ $(NAME) : $(OBG)
 clean :
 	@rm -rf $(OBG)
 
-fclean :
+fclean : clean
 	@rm -rf $(NAME)
 
 re : fclean all
