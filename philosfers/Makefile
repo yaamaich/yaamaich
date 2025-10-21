@@ -1,4 +1,4 @@
-SRC = init.c main.c simulation.c tools.c
+SRC = init.c main.c simulation.c philotools.c
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 NAME = philo

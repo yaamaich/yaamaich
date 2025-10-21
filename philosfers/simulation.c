@@ -12,106 +12,107 @@
 
 #include "philo.h"
 
-void	precise_sleep(long long ms)
+void	ft_usleep(long long ms)
 {
-	long long	start;
+	long long	begin_time;
 
-	start = get_time();
-	while (get_time() - start < ms)
+	begin_time = current_time();
+	while (current_time() - begin_time < ms)
 		usleep(100);
 }
 
-void	*lifes(void *arg)
+void	*philosopher_routine(void *arg)
 {
-	t_philo *philo;
+	t_philo	*philosopher;
 
-	philo = (t_philo *) arg;
-	if ((philo->id % 2 ) == 0)
-		too_late(philo);
+	philosopher = (t_philo *)arg;
+	if ((philosopher->philo_id % 2) == 0)
+		philo_sleep_routine(philosopher);
 	while (1)
-	{	
-		print_status(philo, "is thinking");
-		pthread_mutex_lock(philo->right_fork);
-		print_status(philo, "his taken right fork");
-		pthread_mutex_lock(philo->left_fork);
-		print_status(philo, "his taken left fork");
-		print_status(philo , "is eating");
-		philo_safe(philo);
-		precise_sleep(philo->table->time_to_eat);
-		pthread_mutex_unlock(philo->right_fork);
-		pthread_mutex_unlock(philo->left_fork);
-		check_full(philo);
-		precise_sleep(philo->table->time_to_sleep);
-		if (check_end(philo))
+	{
+		log_action(philosopher, "is thinking");
+		pthread_mutex_lock(philosopher->fork_right);
+		log_action(philosopher, "has taken a fork");
+		pthread_mutex_lock(philosopher->fork_left);
+		log_action(philosopher, "has taken a fork");
+		log_action(philosopher, "is eating");
+		update_meal_status(philosopher);
+		ft_usleep(philosopher->data->eating_time);
+		pthread_mutex_unlock(philosopher->fork_right);
+		pthread_mutex_unlock(philosopher->fork_left);
+		check_philo_fullness(philosopher);
+		ft_usleep(philosopher->data->sleeping_time);
+		if (is_simulation_over(philosopher))
 			return (NULL);
 	}
 	return (NULL);
 }
-void	*one_life(void *arg)
+void	*single_philo_routine(void *arg)
 {
-	t_philo *philo;
-	philo = (t_philo *)arg;
-	print_status(philo, "is	thinking");
-	pthread_mutex_lock(philo->right_fork);
-	print_status(philo, "has taken right fork");
-	precise_sleep(philo->table->time_to_die + 1);
-	print_status(philo, "died");
-	pthread_mutex_unlock(philo->right_fork);
-	
+	t_philo	*philosopher;
+
+	philosopher = (t_philo *)arg;
+	log_action(philosopher, "is thinking");
+	pthread_mutex_lock(philosopher->fork_right);
+	log_action(philosopher, "has taken a fork");
+	ft_usleep(philosopher->data->death_time + 1);
+	log_action(philosopher, "died");
+	pthread_mutex_unlock(philosopher->fork_right);
 	return (NULL);
 }
-void *check_death(void *arg)
+void	*monitor_death(void *arg)
 {
 	t_table	*table;
-	int i;
+	int		checker;
 
 	table = (t_table *)arg;
 	while (1)
 	{
-		i = 0;
+		checker = 0;
 		usleep(500);
-		pthread_mutex_lock(&table->protect);
-		while (i < table->nbr_of_philo)
+		pthread_mutex_lock(&table->write_lock);
+		while (checker < table->philo_count)
 		{
-			if (table->philo_full == table->max_meal)
+			if (table->full_philos == table->meals_required)
 			{
-					return (table->end = 1,
-						pthread_mutex_unlock(&table->protect), NULL);
+				table->simulation_stop = 1;
+				pthread_mutex_unlock(&table->write_lock);
+				return (NULL);
 			}
-			if (table->philos[i].nbr_meals != table->max_meal &&
-				(get_time() - table->philos[i].last_time_eat)
-				> table->time_to_die)
-				return (print_death(i, table), NULL);
-			i++;
+			if (table->philosophers[checker].meals_count != table->meals_required
+				&& (current_time() - table->philosophers[checker].last_meal_time)
+				> table->death_time)
+				return (announce_death(checker, table), NULL);
+			checker++;
 		}
-		pthread_mutex_unlock(&table->protect);
+		pthread_mutex_unlock(&table->write_lock);
 	}
 	return (NULL);
 }
 
-void	simulation(t_table *table)
+void	start_simulation(t_table *table)
 {
-	int i;
-	pthread_t checker;
+	int			philo_iter;
+	pthread_t	death_monitor;
 
-	i = 0;
-	table->time_spend = get_time();
-	if (table->nbr_of_philo == 1)
+	philo_iter = 0;
+	table->start_time = current_time();
+	if (table->philo_count == 1)
 	{
-		pthread_create(&table->philos[0].thread, NULL, one_life,
-			(void *)&table->philos[0]);
-		pthread_join(table->philos[0].thread, NULL);
+		pthread_create(&table->philosophers[0].philo_thread, NULL,
+			single_philo_routine, (void *)&table->philosophers[0]);
+		pthread_join(table->philosophers[0].philo_thread, NULL);
 		return ;
 	}
-	while (i < table->nbr_of_philo)
+	while (philo_iter < table->philo_count)
 	{
-		pthread_create(&table->philos[i].thread, NULL, lifes, 
-			(void*)&table->philos[i]);
-		i++;
+		pthread_create(&table->philosophers[philo_iter].philo_thread, NULL,
+			philosopher_routine, (void *)&table->philosophers[philo_iter]);
+		philo_iter++;
 	}
-	i = 0;
-	pthread_create(&checker, NULL, check_death, (void *)table);
-	while (i < table->nbr_of_philo)
-		pthread_join(table->philos[i++].thread, NULL);
-	pthread_join(checker, NULL);
+	philo_iter = 0;
+	pthread_create(&death_monitor, NULL, monitor_death, (void *)table);
+	while (philo_iter < table->philo_count)
+		pthread_join(table->philosophers[philo_iter++].philo_thread, NULL);
+	pthread_join(death_monitor, NULL);
 }

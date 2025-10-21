@@ -12,83 +12,86 @@
 
 #include "philo.h"
 
-long	ft_atol(const char *str)
+long	string_to_long(const char *str)
 {
-	long result;
-	int i;
+	long	result;
+	int		index;
 
-	i = 0;
+	index = 0;
 	result = 0;
-	while (str[i])
+	while (str[index])
 	{
-		result = result * 10 +(str[i] - '0');
-		i++;
+		result = result * 10 + (str[index] - '0');
+		index++;
 	}
 	return (result);
 }
 
-int	check_len(const char *str)
+int	get_digit_count(const char *str)
 {
-	int i;
-	int j;
-	
-	i = 0;
-	j = 0;
-	while (str[i] == '0')
-		i++;
-	while (str[i] >= '0' && str[i] <= '9')
+	int	cursor;
+	int	digit_len;
+
+	cursor = 0;
+	digit_len = 0;
+	while (str[cursor] == '0')
+		cursor++;
+	while (str[cursor] >= '0' && str[cursor] <= '9')
 	{
-		j++;
-		i++;
+		digit_len++;
+		cursor++;
 	}
-	return (j);
+	return (digit_len);
 }
-int	check_int(const char *str)
+
+int	validate_numeric(const char *str)
 {
-	int i;
-	
-	i = 0;
-	while (str[i])
+	int	iter;
+
+	iter = 0;
+	while (str[iter])
 	{
-		if (str[i] < '0' && str[i] > '9')
+		if (str[iter] < '0' || str[iter] > '9')
 			return (1);
-		i++;
+		iter++;
 	}
 	return (0);
 }
-void	init_table(int argc, char **argv, t_table *table)
+void	setup_table(int argc, char **argv, t_table *table)
 {
-	int i = 0;
+	int	counter;
 
-	i = 0;
-	table->nbr_of_philo = ft_atol(argv[1]);
-	table->time_to_die = ft_atol(argv[2]);
-	table->time_to_eat = ft_atol(argv[3]);
-	table->time_to_sleep = ft_atol(argv[4]);
-	table->max_meal = -1;
+	counter = 0;
+	table->philo_count = string_to_long(argv[1]);
+	table->death_time = string_to_long(argv[2]);
+	table->eating_time = string_to_long(argv[3]);
+	table->sleeping_time = string_to_long(argv[4]);
+	table->meals_required = -1;
 	if (argc == 6)
-		table->max_meal = ft_atol(argv[5]);
-	table->end = 0;
-	table->philos = malloc(sizeof(t_philo) * table->nbr_of_philo);
-	table->forks = malloc(sizeof(pthread_mutex_t) * table->nbr_of_philo);
-	while (i < table->nbr_of_philo)
-		pthread_mutex_init(&table->forks[i++], NULL);
-	pthread_mutex_init(&table->protect, NULL);
-	}
-	void 	init_philo(t_table *table)
-	{
-		int i;
+		table->meals_required = string_to_long(argv[5]);
+	table->simulation_stop = 0;
+	table->full_philos = 0;
+	table->philosophers = malloc(sizeof(t_philo) * table->philo_count);
+	table->forks_array = malloc(sizeof(pthread_mutex_t) * table->philo_count);
+	while (counter < table->philo_count)
+		pthread_mutex_init(&table->forks_array[counter++], NULL);
+	pthread_mutex_init(&table->write_lock, NULL);
+}
 
-		i = 0;
-		while ( i < table->nbr_of_philo)
-		{
-			table->philos[i].id = i + 1;
-			table->philos[i].nbr_meals = 0;
-			table->philos[i].right_fork = &table->forks[i];
-			table->philos[i].left_fork = &table->forks[(i + 1)
-				% table->nbr_of_philo];
-			table->philos[i].table = table;
-			table->philos[i].last_time_eat = get_time();
-			i++;
-		}
+void	setup_philosophers(t_table *table)
+{
+	int	position;
+
+	position = 0;
+	while (position < table->philo_count)
+	{
+		table->philosophers[position].philo_id = position + 1;
+		table->philosophers[position].meals_count = 0;
+		table->philosophers[position].fork_right = &table->forks_array[position];
+		table->philosophers[position].fork_left = &table->forks_array[(position + 1)
+			% table->philo_count];
+		table->philosophers[position].data = table;
+		table->philosophers[position].last_meal_time = current_time();
+		position++;
 	}
+}
