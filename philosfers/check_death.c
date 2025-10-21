@@ -38,14 +38,14 @@ void	*monitor_death(void *arg)
 	{
 		i = 0;
 		pthread_mutex_lock(&t->write_lock);
+		if (t->meals_required != -1 && t->full_philos >= t->philo_count)
+		{
+			t->simulation_stop = 1;
+			pthread_mutex_unlock(&t->write_lock);
+			return (NULL);
+		}
 		while (i < t->philo_count)
 		{
-			if (t->full_philos == t->meals_required)
-			{
-				t->simulation_stop = 1;
-				pthread_mutex_unlock(&t->write_lock);
-				return (NULL);
-			}
 			if (check_death_condition(t, i))
 				return (announce_death(i, t), NULL);
 			i++;
