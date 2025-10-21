@@ -32,13 +32,14 @@ void	*philosopher_routine(void *arg)
 		pthread_mutex_lock(p->fork_left);
 		log_action(p, "has taken a fork");
 		log_action(p, "is eating");
-		update_meal_status(p);
 		ft_usleep(p->data->eating_time, p);
+		update_meal_status(p);
 		pthread_mutex_unlock(p->fork_right);
 		pthread_mutex_unlock(p->fork_left);
 		check_philo_fullness(p);
 		if (is_simulation_over(p))
 			return (NULL);
+		log_action(p, "is sleeping");
 		ft_usleep(p->data->sleeping_time, p);
 	}
 	return (NULL);

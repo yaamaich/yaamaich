@@ -6,7 +6,7 @@
 /*   By: yaamaich <yaamaich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 13:12:35 by yaamaich          #+#    #+#             */
-/*   Updated: 2025/10/21 19:44:14 by yaamaich         ###   ########.fr       */
+/*   Updated: 2025/10/21 22:12:43 by yaamaich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	*monitor_death(void *arg)
 
 	t = (t_table *)arg;
 	while (1)
-		/* mimic aefa: avoid busy-spinning and reduce contention */
 		usleep(500);
 	{
 		i = 0;
