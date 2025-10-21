@@ -12,54 +12,73 @@
 
 #include "philo.h"
 
-void	cleanup_resources(t_table *table)
+void	cleanup_resources(t_table *t)
 {
-	int	loop_var;
+	int	i;
+	int	cnt;
 
-	loop_var = 0;
-	while (loop_var < table->philo_count)
-		pthread_mutex_destroy(&table->forks_array[loop_var++]);
-	pthread_mutex_destroy(&table->write_lock);
-	free(table->forks_array);
-	free(table->philosophers);
-	free(table);
+	i = 0;
+	cnt = t->philo_count;
+	while (i < cnt)
+	{
+		pthread_mutex_destroy(&t->forks_array[i]);
+		i++;
+	}
+	pthread_mutex_destroy(&t->write_lock);
+	free(t->forks_array);
+	free(t->philosophers);
+	free(t);
 }
 
 long long	current_time(void)
 {
-	struct timeval	current_tv;
+	struct timeval	tv;
+	long long		sec;
+	long long		usec;
 
-	gettimeofday(&current_tv, NULL);
-	return ((current_tv.tv_sec * 1000) + (current_tv.tv_usec / 1000));
+	gettimeofday(&tv, NULL);
+	sec = tv.tv_sec * 1000;
+	usec = tv.tv_usec / 1000;
+	return (sec + usec);
 }
 
-void	log_action(t_philo *philo, char *status)
+void	log_action(t_philo *p, char *msg)
 {
-	pthread_mutex_lock(&philo->data->write_lock);
-	if (!philo->data->simulation_stop)
+	long long	timestamp;
+	int			id;
+	int			stop;
+
+	pthread_mutex_lock(&p->data->write_lock);
+	stop = p->data->simulation_stop;
+	if (!stop)
 	{
-		printf("%lld %d %s\n", current_time() - philo->data->start_time,
-			philo->philo_id, status);
+		timestamp = current_time() - p->data->start_time;
+		id = p->philo_id;
+		printf("%lld %d %s\n", timestamp, id, msg);
 	}
-	pthread_mutex_unlock(&philo->data->write_lock);
+	pthread_mutex_unlock(&p->data->write_lock);
 }
 
-void	announce_death(int philo_index, t_table *table)
+void	announce_death(int i, t_table *t)
 {
-	table->simulation_stop = 1;
-	printf("%lld %d died\n",
-		current_time() - table->start_time, table->philosophers[philo_index].philo_id);
-	pthread_mutex_unlock(&table->write_lock);
+	long long	timestamp;
+	int			id;
+
+	t->simulation_stop = 1;
+	timestamp = current_time() - t->start_time;
+	id = t->philosophers[i].philo_id;
+	printf("%lld %d died\n", timestamp, id);
+	pthread_mutex_unlock(&t->write_lock);
 }
 
-int	is_simulation_over(t_philo *philo)
+int	is_simulation_over(t_philo *p)
 {
-	pthread_mutex_lock(&philo->data->write_lock);
-	if (philo->data->simulation_stop)
-	{
-		pthread_mutex_unlock(&philo->data->write_lock);
+	int	stop;
+
+	pthread_mutex_lock(&p->data->write_lock);
+	stop = p->data->simulation_stop;
+	pthread_mutex_unlock(&p->data->write_lock);
+	if (stop)
 		return (1);
-	}
-	pthread_mutex_unlock(&philo->data->write_lock);
 	return (0);
 }

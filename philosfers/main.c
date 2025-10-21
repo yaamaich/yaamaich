@@ -12,64 +12,84 @@
 
 #include "philo.h"
 
-void	update_meal_status(t_philo *philo)
+void	update_meal_status(t_philo *p)
 {
-	pthread_mutex_lock(&philo->data->write_lock);
-	philo->last_meal_time = current_time();
-	philo->meals_count++;
-	pthread_mutex_unlock(&philo->data->write_lock);
+	pthread_mutex_lock(&p->data->write_lock);
+	p->last_meal_time = current_time();
+	p->meals_count = p->meals_count + 1;
+	pthread_mutex_unlock(&p->data->write_lock);
 }
 
-void	philo_sleep_routine(t_philo *philo)
+void	philo_sleep_routine(t_philo *p)
 {
-	log_action(philo, "is sleeping");
-	ft_usleep(philo->data->sleeping_time);
+	char	*action;
+
+	action = "is sleeping";
+	log_action(p, action);
+	ft_usleep(p->data->sleeping_time);
 }
 
-void	check_philo_fullness(t_philo *philo)
+void	check_philo_fullness(t_philo *p)
 {
-	pthread_mutex_lock(&philo->data->write_lock);
-	if (philo->meals_count != -1
-		&& philo->meals_count == philo->data->meals_required)
-		philo->data->full_philos++;
-	pthread_mutex_unlock(&philo->data->write_lock);
-}
-static int	validate_arguments(int count, char **args)
-{
-	int		param_idx;
-	long	num_value;
+	int	req;
+	int	curr;
 
-	param_idx = 1;
-	while (param_idx < count)
+	pthread_mutex_lock(&p->data->write_lock);
+	req = p->data->meals_required;
+	curr = p->meals_count;
+	if (curr != -1 && curr == req)
+		p->data->full_philos++;
+	pthread_mutex_unlock(&p->data->write_lock);
+}
+static int	validate_arguments(int cnt, char **args)
+{
+	int		i;
+	long	val;
+	int		digit_cnt;
+	int		is_valid;
+
+	i = 1;
+	while (i < cnt)
 	{
-		num_value = string_to_long(args[param_idx]);
-		if (!args[param_idx][0] || validate_numeric(args[param_idx])
-			|| get_digit_count(args[param_idx]) > 10
-			|| num_value < INT_MIN || num_value > INT_MAX || num_value == 0)
+		val = string_to_long(args[i]);
+		digit_cnt = get_digit_count(args[i]);
+		is_valid = validate_numeric(args[i]);
+		if (!args[i][0] || is_valid || digit_cnt > 10)
 		{
 			write(2, "Error: Invalid arguments\n", 25);
 			write(2, "Please provide positive numbers only\n", 37);
 			return (0);
 		}
-		param_idx++;
+		if (val < INT_MIN || val > INT_MAX || val == 0)
+		{
+			write(2, "Error: Invalid arguments\n", 25);
+			write(2, "Please provide positive numbers only\n", 37);
+			return (0);
+		}
+		i++;
 	}
 	return (1);
 }
 
 int	main(int ac, char **av)
 {
-	t_table	*table;
+	t_table	*tbl;
+	int		args_valid;
 
 	if (ac < 5 || ac > 6)
-		return (write(2, "Error: Wrong number of arguments\n", 33), 1);
-	if (!validate_arguments(ac, av))
+	{
+		write(2, "Error: Wrong number of arguments\n", 33);
 		return (1);
-	table = malloc(sizeof(t_table));
-	if (!table)
+	}
+	args_valid = validate_arguments(ac, av);
+	if (!args_valid)
 		return (1);
-	setup_table(ac, av, table);
-	setup_philosophers(table);
-	start_simulation(table);
-	cleanup_resources(table);
+	tbl = malloc(sizeof(t_table));
+	if (!tbl)
+		return (1);
+	setup_table(ac, av, tbl);
+	setup_philosophers(tbl);
+	start_simulation(tbl);
+	cleanup_resources(tbl);
 	return (0);
 }
