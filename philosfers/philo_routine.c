@@ -37,6 +37,9 @@ void	*philosopher_routine(void *arg)
 		philo_sleep_routine(p);
 	while (!is_simulation_over(p))
 	{
+		if (p->data->meals_required != -1
+			&& p->meals_count >= p->data->meals_required)
+			return (NULL);
 		log_action(p, "is thinking");
 		if (is_simulation_over(p))
 			return (NULL);
@@ -96,7 +99,8 @@ void	*monitor_death(void *arg)
 		pthread_mutex_lock(&t->write_lock);
 		while (i < t->philo_count)
 		{
-			if (t->full_philos == t->meals_required)
+			if (t->meals_required != -1
+				&& t->full_philos >= t->philo_count)
 			{
 				t->simulation_stop = 1;
 				pthread_mutex_unlock(&t->write_lock);

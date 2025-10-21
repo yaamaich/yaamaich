@@ -34,7 +34,7 @@ void	check_philo_fullness(t_philo *p)
 	pthread_mutex_lock(&p->data->write_lock);
 	req = p->data->meals_required;
 	curr = p->meals_count;
-	if (curr != -1 && curr == req)
+	if (req != -1 && curr == req)
 		p->data->full_philos++;
 	pthread_mutex_unlock(&p->data->write_lock);
 }
