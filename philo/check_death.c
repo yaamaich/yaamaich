@@ -35,6 +35,8 @@ void	*monitor_death(void *arg)
 
 	t = (t_table *)arg;
 	while (1)
+		/* mimic aefa: avoid busy-spinning and reduce contention */
+		usleep(500);
 	{
 		i = 0;
 		pthread_mutex_lock(&t->write_lock);
