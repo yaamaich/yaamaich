@@ -45,6 +45,14 @@ typedef struct s_mlx_data
     int     size_line;
     int     endian;
     t_point point;
+    int     key_w;
+    int     key_s;
+    int     key_a;
+    int     key_d;
+    int     key_up;
+    int     key_down;
+    int     key_left;
+    int     key_right;
 }   t_mlx_data;
 
 void put_pixel(t_mlx_data *data, int x, int y, int color)
@@ -98,6 +106,26 @@ void clear_image(t_mlx_data *data)
 
 int render(t_mlx_data *data)
 {
+    // Update position based on pressed keys
+    if (data->key_w || data->key_up)
+        data->point.y -= MOVE_SPEED;
+    if (data->key_s || data->key_down)
+        data->point.y += MOVE_SPEED;
+    if (data->key_a || data->key_left)
+        data->point.x -= MOVE_SPEED;
+    if (data->key_d || data->key_right)
+        data->point.x += MOVE_SPEED;
+    
+    // Keep point within window bounds
+    if (data->point.x < 0)
+        data->point.x = 0;
+    if (data->point.x > WIN_WIDTH - POINT_SIZE)
+        data->point.x = WIN_WIDTH - POINT_SIZE;
+    if (data->point.y < 0)
+        data->point.y = 0;
+    if (data->point.y > WIN_HEIGHT - POINT_SIZE)
+        data->point.y = WIN_HEIGHT - POINT_SIZE;
+    
     clear_image(data);
     draw_square(data, data->point.x, data->point.y, POINT_SIZE, 0xFF0000);
     mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
@@ -111,26 +139,45 @@ int key_press(int keycode, t_mlx_data *data)
         mlx_destroy_window(data->mlx_ptr, data->win_ptr);
         exit(0);
     }
-    else if (keycode == KEY_W || keycode == KEY_UP)
-        data->point.y -= MOVE_SPEED;
-    else if (keycode == KEY_S || keycode == KEY_DOWN)
-        data->point.y += MOVE_SPEED;
-    else if (keycode == KEY_A || keycode == KEY_LEFT)
-        data->point.x -= MOVE_SPEED;
-    else if (keycode == KEY_D || keycode == KEY_RIGHT)
-        data->point.x += MOVE_SPEED;
+    else if (keycode == KEY_W)
+        data->key_w = 1;
+    else if (keycode == KEY_S)
+        data->key_s = 1;
+    else if (keycode == KEY_A)
+        data->key_a = 1;
+    else if (keycode == KEY_D)
+        data->key_d = 1;
+    else if (keycode == KEY_UP)
+        data->key_up = 1;
+    else if (keycode == KEY_DOWN)
+        data->key_down = 1;
+    else if (keycode == KEY_LEFT)
+        data->key_left = 1;
+    else if (keycode == KEY_RIGHT)
+        data->key_right = 1;
     
-    // Keep point within window bounds
-    if (data->point.x < 0)
-        data->point.x = 0;
-    if (data->point.x > WIN_WIDTH - POINT_SIZE)
-        data->point.x = WIN_WIDTH - POINT_SIZE;
-    if (data->point.y < 0)
-        data->point.y = 0;
-    if (data->point.y > WIN_HEIGHT - POINT_SIZE)
-        data->point.y = WIN_HEIGHT - POINT_SIZE;
+    return (0);
+}
+
+int key_release(int keycode, t_mlx_data *data)
+{
+    if (keycode == KEY_W)
+        data->key_w = 0;
+    else if (keycode == KEY_S)
+        data->key_s = 0;
+    else if (keycode == KEY_A)
+        data->key_a = 0;
+    else if (keycode == KEY_D)
+        data->key_d = 0;
+    else if (keycode == KEY_UP)
+        data->key_up = 0;
+    else if (keycode == KEY_DOWN)
+        data->key_down = 0;
+    else if (keycode == KEY_LEFT)
+        data->key_left = 0;
+    else if (keycode == KEY_RIGHT)
+        data->key_right = 0;
     
-    render(data);
     return (0);
 }
 
@@ -173,11 +220,22 @@ int main(int ac , char **av)
     data.point.x = WIN_WIDTH / 2;
     data.point.y = WIN_HEIGHT / 2;
     
+    // Initialize key states to 0 (not pressed)
+    data.key_w = 0;
+    data.key_s = 0;
+    data.key_a = 0;
+    data.key_d = 0;
+    data.key_up = 0;
+    data.key_down = 0;
+    data.key_left = 0;
+    data.key_right = 0;
+    
     // Initial render
     render(&data);
     
     // Set up hooks
     mlx_hook(data.win_ptr, 2, 1L<<0, key_press, &data);
+    mlx_hook(data.win_ptr, 3, 1L<<1, key_release, &data);
     mlx_hook(data.win_ptr, 17, 0, close_window, &data);
     mlx_loop_hook(data.mlx_ptr, render, &data);
     
