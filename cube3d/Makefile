@@ -7,9 +7,6 @@ CFLAGS = -Wall -Wextra -Werror
 LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-GNL_DIR = ./get_next_line
-GNL_SRC = $(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c
-
 SRC = main.c\
 	  parse.c\
 	  utils.c\
@@ -31,6 +28,7 @@ $(NAME): $(LIBFT) $(OBJ)
 
 clean:
 	rm -f $(OBJ)
+	rm -f ./get_next_line/*.o
 	@$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean
