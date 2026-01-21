@@ -11,55 +11,178 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <mlx.h>
+
+#define WIN_WIDTH 800
+#define WIN_HEIGHT 600
+#define POINT_SIZE 10
+#define MOVE_SPEED 5
+
+// Key codes for Linux
+#define KEY_ESC 65307
+#define KEY_W 119
+#define KEY_A 97
+#define KEY_S 115
+#define KEY_D 100
+#define KEY_UP 65362
+#define KEY_DOWN 65364
+#define KEY_LEFT 65361
+#define KEY_RIGHT 65363
+
+typedef struct s_point
+{
+    int x;
+    int y;
+}   t_point;
+
+typedef struct s_mlx_data
+{
+    void    *mlx_ptr;
+    void    *win_ptr;
+    void    *img_ptr;
+    char    *img_data;
+    int     bits_per_pixel;
+    int     size_line;
+    int     endian;
+    t_point point;
+}   t_mlx_data;
+
+void put_pixel(t_mlx_data *data, int x, int y, int color)
+{
+    int pixel;
+
+    if (x >= 0 && x < WIN_WIDTH && y >= 0 && y < WIN_HEIGHT)
+    {
+        pixel = (y * data->size_line) + (x * (data->bits_per_pixel / 8));
+        data->img_data[pixel] = color & 0xFF;
+        data->img_data[pixel + 1] = (color >> 8) & 0xFF;
+        data->img_data[pixel + 2] = (color >> 16) & 0xFF;
+    }
+}
+
+void draw_square(t_mlx_data *data, int x, int y, int size, int color)
+{
+    int i;
+    int j;
+
+    i = 0;
+    while (i < size)
+    {
+        j = 0;
+        while (j < size)
+        {
+            put_pixel(data, x + i, y + j, color);
+            j++;
+        }
+        i++;
+    }
+}
+
+void clear_image(t_mlx_data *data)
+{
+    int x;
+    int y;
+
+    y = 0;
+    while (y < WIN_HEIGHT)
+    {
+        x = 0;
+        while (x < WIN_WIDTH)
+        {
+            put_pixel(data, x, y, 0x000000);
+            x++;
+        }
+        y++;
+    }
+}
+
+int render(t_mlx_data *data)
+{
+    clear_image(data);
+    draw_square(data, data->point.x, data->point.y, POINT_SIZE, 0xFF0000);
+    mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
+    return (0);
+}
+
+int key_press(int keycode, t_mlx_data *data)
+{
+    if (keycode == KEY_ESC)
+    {
+        mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+        exit(0);
+    }
+    else if (keycode == KEY_W || keycode == KEY_UP)
+        data->point.y -= MOVE_SPEED;
+    else if (keycode == KEY_S || keycode == KEY_DOWN)
+        data->point.y += MOVE_SPEED;
+    else if (keycode == KEY_A || keycode == KEY_LEFT)
+        data->point.x -= MOVE_SPEED;
+    else if (keycode == KEY_D || keycode == KEY_RIGHT)
+        data->point.x += MOVE_SPEED;
+    
+    // Keep point within window bounds
+    if (data->point.x < 0)
+        data->point.x = 0;
+    if (data->point.x > WIN_WIDTH - POINT_SIZE)
+        data->point.x = WIN_WIDTH - POINT_SIZE;
+    if (data->point.y < 0)
+        data->point.y = 0;
+    if (data->point.y > WIN_HEIGHT - POINT_SIZE)
+        data->point.y = WIN_HEIGHT - POINT_SIZE;
+    
+    render(data);
+    return (0);
+}
+
+int close_window(t_mlx_data *data)
+{
+    mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+    exit(0);
+    return (0);
+}
 
 int main(int ac , char **av)
 {
-    t_game game;
-    int fd;
-    char  *line;
-
-    if (ac != 2)
-    {
-        printf("Error\nUsage: ./cub3d <map.cub>\n");
-        exit(1);
-    }
-    if (!check_extension(av[1]))
-    {
-        printf("Error\nMap file must have .cub extension\n");
-        exit(1);
-    }
-    fd = open(av[1],O_RDONLY);
-    if (fd < 0)
-        return (printf("Error\nCannot open file\n"), 1);
-    init_config(&game);
-    line = get_next_line(fd);
-    while(line != NULL)
-    {
-        parse_line(&game, line);
-        free(line);
-        line = get_next_line(fd);
-    }
-    close(fd);
+    t_mlx_data data;
     
-    // Validate parsed data
-    if (!validate_all(&game))
+    (void)ac;
+    (void)av;
+    
+    // Initialize MLX
+    data.mlx_ptr = mlx_init();
+    if (!data.mlx_ptr)
+    {
+        printf("Error\nFailed to initialize MLX\n");
         return (1);
+    }
     
-    // Debug output - print what we parsed
-    printf("\n=== Parsing Results ===\n");
-    printf("North texture: %s\n", game.path_no);
-    printf("South texture: %s\n", game.path_so);
-    printf("West texture: %s\n", game.path_we);
-    printf("East texture: %s\n", game.path_ea);
-    printf("Floor color: %d (0x%X)\n", game.color_floor, game.color_floor);
-    printf("Ceiling color: %d (0x%X)\n", game.color_ceiling, game.color_ceiling);
-    printf("Map width: %d\n", game.map_width);
-    printf("Map height: %d\n", game.map_height);
-    printf("Player start: (%.0f, %.0f) facing '%c'\n", 
-           game.player_start_x, game.player_start_y, game.player_start_dir);
-    printf("\nMap:\n");
-    for (int i = 0; i < game.map_height; i++)
-        printf("%s\n", game.map[i]);
+    // Create window
+    data.win_ptr = mlx_new_window(data.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "Cub3D - Movable Point");
+    if (!data.win_ptr)
+    {
+        printf("Error\nFailed to create window\n");
+        return (1);
+    }
     
-    return(0);
+    // Create image
+    data.img_ptr = mlx_new_image(data.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
+    data.img_data = mlx_get_data_addr(data.img_ptr, &data.bits_per_pixel, 
+                                      &data.size_line, &data.endian);
+    
+    // Initialize point position (center of screen)
+    data.point.x = WIN_WIDTH / 2;
+    data.point.y = WIN_HEIGHT / 2;
+    
+    // Initial render
+    render(&data);
+    
+    // Set up hooks
+    mlx_hook(data.win_ptr, 2, 1L<<0, key_press, &data);
+    mlx_hook(data.win_ptr, 17, 0, close_window, &data);
+    mlx_loop_hook(data.mlx_ptr, render, &data);
+    
+    // Start the loop
+    mlx_loop(data.mlx_ptr);
+    
+    return (0);
 }
