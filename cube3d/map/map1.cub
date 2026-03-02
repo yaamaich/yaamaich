@@ -1,13 +1,19 @@
-NO ./textures/north.xpm
-SO ./textures/south.xpm
-WE ./textures/west.xpm
-EA ./textures/east.xpm
+NO ./textures/wall.png
+SO ./textures/wall.png
+WE ./textures/wall.png
+EA ./textures/wall.png
 
-F 220,100,0
-C 225,30,0
+F 50,50,50
+C 100,150,255
 
-1111111111
-1000100011
-10N0100001
-1000000001
-1111111111
+
+1111111111111
+1000100000001
+10S0000100001
+1000000000001
+1000000000001
+1000000000001
+1000000000001
+1000000000001
+1000000000001
+1111111111111

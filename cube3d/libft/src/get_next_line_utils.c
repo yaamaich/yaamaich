@@ -12,6 +12,18 @@
 
 #include "libft.h"
 
+size_t	ft_strlen(const char *c)
+{
+	size_t	i;
+
+	i = 0;
+	if (!c)
+		return (0);
+	while (c[i])
+		i++;
+	return (i);
+}
+
 char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
 	unsigned int	i;
@@ -80,3 +92,17 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	return (p);
 }
 
+char	*ft_strdup(const char *s)
+{
+	char	*ptr;
+	int		len;
+
+	len = ft_strlen(s);
+	ptr = malloc(len + 1);
+	if (!ptr)
+		return (NULL);
+	ptr[len] = '\0';
+	while (len--)
+		ptr[len] = s[len];
+	return (ptr);
+}
